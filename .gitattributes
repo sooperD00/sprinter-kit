@@ -1,0 +1,14 @@
+# One line-ending convention, everywhere: LF in the index and LF in the working tree, on Windows,
+# the Mac and Linux alike. The templates get copied into other repos, so a CRLF that slipped in
+# here would travel into every one of them. And sprinter.py starts with a shebang line: with a
+# CRLF on it, ./scripts/sprinter.py fails with "No such file or directory" for an interpreter
+# named python3\r.
+* text=auto eol=lf
+
+# Binary: never converted, never diffed as text. `text=auto` already detects these, but saying
+# it out loud costs nothing and survives a file that fools the heuristic.
+*.png binary
+*.PNG binary
+*.jpg binary
+*.pdf binary
+*.zip binary
