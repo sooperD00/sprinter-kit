@@ -1,0 +1,102 @@
+>> HOW TO USE THIS FILE
+>> Copy it to reading-list-for-<id>-<leg>.txt at the close of the leg before this one, and fill
+>> it against the code as it actually landed. Delete every >> line before you hand it over.
+>> {{adr}}'s "Reading lists" section has the rules. sprinter-kit's examples/ has a real one.
+>>
+>> Before you hand it over, check the seven things no search finds for you:
+>>   1. A decision this leg needs that nothing near the leg cites. Read each done-when item and
+>>      ask what it silently depends on.
+>>   2. A decision named by a phrase instead of by its ID. Search for the done-when's own words.
+>>   3. What to skip. A citation means relevant, never necessary: cut what an earlier leg closed.
+>>   4. What the plan left undecided. Name it under WHAT THIS LIST CANNOT SEE, so the session
+>>      decides it on purpose.
+>>   5. A file the leg deletes or replaces. Read that file; nothing cites a file on its way out.
+>>   6. A spec that is a picture. A mockup or diagram linked from a doc is not a citation.
+>>   7. Seams: files this leg must not open. The plan states them in prose, away from the paths,
+>>      and the largest file in the repo is usually the one that needs naming.
+
+READING LIST — [s-<id>-<leg>]: <what this leg does>
+Written <YYYY-MM-DD> against main at <short sha>. If main has moved much, regenerate it.
+Reading cost: about <N> tokens.
+
+
+THE ONE RULE
+
+  <The one line this leg must not cross, and what to do on reaching it. For example: this leg
+  changes who reads the list. It changes no version. If you find yourself upgrading, stop.
+  That is leg c.>
+
+
+BEFORE YOU START
+
+  Run these. If one comes back wrong, say which and stop.
+
+    git log --oneline -1         <this list's commit, or a later one on main>
+    git status --porcelain       empty
+    <anything else this leg needs to be true: a service up, a file present, a setting made>
+
+
+WHAT YOU ARE DOING
+
+  <N> commits, in this order:
+
+    1  <short name>               <what it does>
+
+  <Why this order, in one sentence: the Kind's graph.>
+
+
+READ THIS
+
+  docs/sprints/remaining/sprint-<id>-<short-name>.md      <all N lines, or which>
+
+    <Which lines are this leg, and what the rest is: what happened last time, and what
+    is not yours.>
+
+  {{adr-path}}      these sections
+
+    Vocabulary, including the Landed, Checklist marks and Entry gate paragraphs
+    Referring to a sprint
+    Tags in source
+    Reading lists
+    Run a sprint
+    Hand off a leg
+    Housekeeping and tech debt, plus the ID rule in IDs and file names
+
+    Skip the rest. Planning, closing and ordering belong to whoever plans and closes,
+    which is not this session.
+
+  Files you will edit:
+
+    <path>                    <how much of it, and which part is not yours>
+
+  Files you read but do not edit:
+
+    <path>                    <why it is on the list>
+
+
+DO NOT READ
+
+  <path>                      <why, and what to run instead if the question comes up>
+
+  If you think you need something that is not on this list, ask, and say what
+  question you are trying to answer. Do not open it first and mention it after.
+
+
+WHAT THIS LIST CANNOT SEE
+
+  <State that lives outside the repo: a dashboard, another machine, an account.>
+
+  <What the plan left open on purpose. The Watches give the constraints. The shape is
+  yours, and what you decide is worth a line in the sprint file.>
+
+  A rule this leg needs that no document cites. This list was assembled by reading,
+  so it names what one reader noticed.
+
+
+WHEN YOU ARE DONE
+
+  {{adr}}'s "Hand off a leg" is the checklist. In this leg's terms: check the done-when
+  items at the code rather than at the plan, write the leg's Landed note in the sprint
+  file, record the handoff date, file anything the leg shed into housekeeping.md or
+  techdebt.md with a generated ID, and confirm that `git grep 'SPRINT-<id>-<leg>'`
+  comes back empty.
