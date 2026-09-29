@@ -1,0 +1,141 @@
+READING LIST — [s-a75ff1-b]: flip the consumers, delete requirements.txt
+Written 2026-09-22 against main at bdc7f11. If main has moved much, regenerate it.
+Reading cost: about 8,500 tokens, two thirds of which is the planning docs.
+
+
+THE ONE RULE
+
+  This leg changes who reads the dependency list. It changes no package version.
+  If you find yourself re-locking, upgrading, or editing the constraint block in
+  pyproject.toml, stop. That is leg c.
+
+
+BEFORE YOU START
+
+  Run these four. If one comes back wrong, say which and stop.
+
+    git log --oneline -1         bdc7f11, or a later commit on main
+    git status --porcelain       empty
+    docker info                  daemon up; the build and the probe both need it
+    ls backend/.env              missing, today, on this machine
+
+  backend/.env has to exist before the container run. It is gitignored, so it gets
+  made by hand from backend/.env.example, and it must carry the dev
+  DATABASE_PUBLIC_URL. If you cannot tell which database a value points at, ask.
+
+  Two settings live in the Railway dashboard rather than in this repo: the
+  healthcheck path and the builder. The sprint file's first prework block says what
+  they are and why. Ask whether they are done before you push commit 2.
+
+  Measured here on 2026-09-22, so you do not have to rebuild an old commit to get it:
+
+    the current image is 355MB, built from bdc7f11, tagged ap:pre-legb
+    its largest layer is `pip install -r requirements.txt` at 113MB — the layer
+      you are replacing
+    the apt line (libxml2, libxslt1.1) is 4.37MB of it, which is one reason to
+      leave it alone
+
+  355MB is the number the size done-when compares against. Drop the image when you
+  are finished with it: docker rmi ap:pre-legb
+
+
+WHAT YOU ARE DOING
+
+  Four commits, in this order:
+
+    1  uv python pin 3.12             writes backend/.python-version
+    2  the Dockerfile                 installs from pyproject + uv.lock, dev group out
+    3  the README                     Quick Start stops telling people to use pip
+    4  git rm backend/requirements.txt
+
+  The order is the consumer graph: the image, then the humans, then the file both
+  of them named. Commit 2 is the one that deploys.
+
+
+READ THIS
+
+  docs/sprints/remaining/sprint-a75ff1-backend-dependencies.md      all 252 lines
+
+    Lines 92-195 are leg b, and they are the spec: two prework blocks, ten
+    done-when items, four commits, five Watches. Read the Watches twice. They
+    carry what earlier sessions already worked out about PATH, the interpreter,
+    image size, the ignore rules and the deploy, and each one exists because
+    something went wrong or nearly did.
+
+    Lines 19-91 are leg a: what happened last time, including the commit that
+    broke the Railway deploy. Lines 196-252 are legs c and d, which tell you what
+    is not yours.
+
+  docs/decisions/adr-018-uv-for-backend-dependencies.md             all 25 lines
+
+    Why uv, why the legs are cut where they are, and the update of 2026-09-21 that
+    settles the interpreter at 3.12.
+
+  docs/decisions/adr-021-planning-system.md                         these sections
+
+    Vocabulary, including the Landed, Checklist marks and Entry gate paragraphs
+    Referring to a sprint
+    Tags in source
+    Reading lists
+    Run a sprint
+    Hand off a leg
+    Housekeeping and tech debt, plus the ID rule in IDs and file names
+
+    Skip the rest. Planning, closing, ordering and the migration record belong to
+    whoever plans and closes, which is not this session.
+
+  Files you will edit:
+
+    Dockerfile                36 lines. Stage 2 is the target; stage 1 is Node and
+                              is not yours.
+    README.md                 lines 86-113 only: the venv and pip block, and the
+                              paragraph about the generated file. Tests and Checks
+                              below them stay as they are.
+    .dockerignore             line 34 carries this leg's cleanup marker. The marker
+                              and its note go. The **/.venv and **/venv rules stay.
+    .gitattributes            one clause of the opening comment names the file.
+    backend/.python-version   does not exist yet; commit 1 writes it.
+
+  Files you read but do not edit:
+
+    start.sh                  8 lines. PATH inside the image is its contract.
+    backend/pyproject.toml    105 lines. Lines 48-100 belong to leg c.
+
+
+DO NOT READ
+
+  backend/uv.lock             893 lines of generated resolution. If you need to
+                              know what resolved, run `uv tree --depth 1` from
+                              backend/ instead of opening it.
+  backend/requirements.txt    generated, and deleted by commit 4. The only fact in
+                              it is the uv export line in its header, and that dies
+                              with the file. Named here because the usual rule is to
+                              read what you delete.
+  backend/scripts/dep_freeze.py and backend/tests/test_dep_freeze.py — leg c's.
+
+  If you think you need something that is not on this list, ask, and say what
+  question you are trying to answer. Do not open it first and mention it after.
+
+
+WHAT THIS LIST CANNOT SEE
+
+  Whether the Railway prework happened. That is dashboard state.
+
+  Whether uv pulls its own Python into the image. Only the build log says so, and
+  it says it once.
+
+  What the plan left open on purpose: how uv gets into the image, one build stage
+  or two, the layer order. The Watches give you the constraints. The shape is
+  yours, and what you decide is worth a line in the sprint file.
+
+  A rule this leg needs that no document cites. This list was assembled by reading,
+  so it names what one reader noticed.
+
+
+WHEN YOU ARE DONE
+
+  ADR-021's "Hand off a leg" is the checklist. In this leg's terms: check the ten
+  done-when items at the code rather than at the plan, write the leg's Landed note
+  in the sprint file, record the handoff date, file anything the leg shed into
+  housekeeping.md or techdebt.md with a generated ID, and confirm that
+  `git grep 'SPRINT-a75ff1-b'` comes back empty.
