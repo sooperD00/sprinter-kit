@@ -137,6 +137,13 @@ Provenance lines seen so far: `From [s-<id>]'s Out of Scope`, `Filed from <where
 [s-<id>-<leg>]`, `Pulled from Housekeeping`, `Moved out of [s-<id>]`, `Found in <review>`. The date
 travels with the item every time it moves.
 
+A change to the planning system itself (the handbook, its templates, the kit's scripts) is a
+housekeeping item whose text starts `kit:`. The kit review finds them with `grep -n '] kit:'`.
+
+```
+- [ ] [h-<id>] kit: What should change in the kit, and why.
+```
+
 ## Who reads what
 
 The handbook is long so that each session can read only its part. These are the sections each

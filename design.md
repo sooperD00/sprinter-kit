@@ -15,6 +15,35 @@ less often.
   drift on purpose. The Status line records the kit commit each copy came from, so the drift is
   one diff away.
 
+## One clone, beside the projects
+
+The kit lives in one clone next to the projects that use it. Each way of putting it inside a
+project failed when tried on scratch repos on 2026-09-30:
+
+| Layout | What happened |
+|--------|---------------|
+| A clone nested in the project | `git add -A` committed it as a bare commit pointer, and a fresh clone of the project got none of the kit. |
+| A submodule | A plain clone got none of the kit. A `--recurse-submodules` clone landed on a detached HEAD, where a quick fix is easy to lose. Every kit update costs a pointer commit in every project. |
+| A plain copy (a `git subtree` lands the same files) | The kit's own files became the project's scan suspects: 12 lines, from the old sprint numbers in the examples and the banned-word pattern in the script. A brand-new project scanned as brownfield. |
+
+- A copy inside the project promises edits that travel with it. The project already has those.
+  init copied the rules in, and the stamp in the handbook's Status line is the baseline for a
+  diff against the kit.
+- Reading the kit off github.com fails for a different reason. An agent's web fetch returns a
+  small model's answer about the page, not the file, and the script can't run from a page.
+- An agent in a project session needs permission to edit a clone outside the project. The kit
+  then changes only when someone decides to change it.
+- The capture step lives in the project because the kit is public and some projects are private.
+  A promoted change gets rewritten in generic terms for the same reason.
+- Promotion waits for a second project, for the reason in Thin on purpose: a generator built
+  after one example encodes the shape of one example. (The general form is the rule of three,
+  Don Roberts' via Fowler's *Refactoring*: do it once, wince the second time, refactor the
+  third.)
+
+The layout gets revisited the day the kit ships a linter. A newer linter can fail a project whose
+handbook is older, so linters get pinned per project, the way a pre-commit hook pins its `rev:`.
+That is the time to package the kit.
+
 ## A script where the handbook gives an exact form, an agent where it says decide
 
 | step | who | why |
@@ -97,6 +126,8 @@ The handbook is ADR-021 from application-pipeline at `8185187`, changed only her
    SKILL.md's brownfield path now.
 10. Housekeeping's provenance example lost its "today", which was true only in
     application-pipeline.
+11. Housekeeping and tech debt gained a last bullet: a change to the planning system itself goes
+    in as a `kit:` item, for the kit review to collect.
 
 Item 6 is worth carrying back to application-pipeline's ADR-021 by hand. Its tech debt already
 holds `[t-4194e9]`.

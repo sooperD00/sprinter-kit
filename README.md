@@ -26,8 +26,10 @@ repo as your own ADR, and your repo edits its copy from then on.
 
 ## Use it
 
-Clone the kit anywhere. Then open an agent session in the repo you are setting up, and hand it
-the prompt:
+Clone the kit once, beside your projects, and never inside one
+([design.md](design.md#one-clone-beside-the-projects) has the tested reasons). Then open an agent
+session in the repo you are setting up, give it the kit's folder (in Claude Code,
+`claude --add-dir ~/repos/sprinter-kit`), and hand it the prompt:
 
 ```
 Read ~/repos/sprinter-kit/SKILL.md and set this repo up.
@@ -59,6 +61,56 @@ ln -s ~/repos/sprinter-kit ~/.claude/skills/sprinter-kit
   session loads on its own.
 - Plan your sprints. It builds the place they live.
 - Commit. You review, you commit.
+
+## Changing the kit
+
+Expect the kit to change as projects use it. Capture those changes while you work on a project,
+and decide them at a kit review. Never do both in one sitting.
+
+**While you work on a project**
+
+| You hit | Do this, then get back to work | Tracked in |
+|---------|--------------------------------|------------|
+| A rule or template that's wrong for this project | Edit the project's copy in place | the project |
+| A helper script this project needs | Write it in the project's own `scripts/` | the project |
+| Something the kit might want, that helper included | Add `[h-<id>] kit: <what and why>` to the project's `housekeeping.md` | the project |
+| A kit bug that blocks you | Fix it here, commit it on its own, and describe it in generic terms | the kit |
+
+Capture ideas in the project, never in this repo's issues. The kit is public, and some projects
+are private.
+
+**The kit review.** Hold one before you set up the next project, since that project benefits
+first.
+
+1. Collect the `kit:` lines from every project:
+   ```
+   grep -n '] kit:' ~/repos/*/docs/sprints/housekeeping.md
+   ```
+2. In each project, list what it changed in its copies since adopting the kit:
+   ```
+   init=$(git log --diff-filter=A --format=%h -- docs/sprints/plan.md)
+   git diff $init -- 'docs/decisions/*planning-system.md' docs/sprints/sprint-template.md docs/reading/reading-list-template.txt
+   ```
+3. Decide each item:
+   - **Promote** it when a second project wants it, or when it fixes something wrong for
+     everyone.
+   - **Keep it local** when it's specific to one project's domain, stack or people.
+   - **Drop** it when it worked around something that has since been fixed.
+4. Rewrite each promoted change into the kit in generic terms. Never cherry-pick a commit from a
+   private project.
+5. Clear each decided `kit:` line. Delete it, or drop the `kit:` prefix when it stays as work for
+   that project.
+6. Tag the kit: `git tag v0.2 && git push --tags` after the first review, `v0.3` after the next.
+
+**Bringing a kit change into an older project.** Diff the kit from the project's stamp (the
+version in its handbook's Status line) to the new tag:
+
+```
+git -C ~/repos/sprinter-kit diff <stamp>..v0.2 -- templates/
+```
+
+Apply what you want by hand, then update the stamp to the tag. Do this by hand a few times before
+scripting it.
 
 ## Later ++
 
