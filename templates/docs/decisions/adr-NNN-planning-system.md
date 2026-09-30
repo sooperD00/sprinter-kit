@@ -187,6 +187,7 @@ Do not reconcile these against each other or against `git log`. They measure dif
 - Keep the dated provenance line when an item moves, the way "(Pulled from Housekeeping, 2026-09-17)" reads.
 - Nothing renumbers these lists. The count is reported, not maintained.
 - Source may cite an `[h-` or `[t-` item, under the rules in Tags in source. What it may not do is be the only record: the ID exists because the item is in a list, and the day it gets a sprint the reference becomes that sprint's marker.
+- File a change to the planning system itself (this record, its templates, the kit's scripts) in `housekeeping.md` as `[h-<id>] kit: <what and why>`. sprinter-kit's README says how those get reviewed.
 
 **Consequences**
 - `plan.md` becomes the single point of failure. If it drifts, nothing resolves.
