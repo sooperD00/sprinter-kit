@@ -6,8 +6,8 @@ description: Sets up the sprinter-kit planning system in a git repo (hex-ID spri
 # Set up sprinter-kit in a repo
 
 You are the setup session. You give one repo the planning system in the handbook, confirm the
-few choices that belong to the person, and leave no blank unfilled. You do not plan the
-project's sprints, and you do not write the project's code.
+few choices that belong to the person, and leave no blank unfilled. You plan no sprint except
+the one that migrates an old plan, and you write none of the project's code.
 
 `<kit>` below is the folder this file is in. Run every command from inside the target repo.
 On Windows Git Bash, `python` replaces `python3`.
@@ -44,15 +44,17 @@ It writes nothing. Read all of it; `--all` lists every suspect line instead of t
 - **Mode.** Greenfield: nothing to migrate. Brownfield: an old plan, numbered sprints, or banned
   words in source. The scan suggests one. The person decides.
 - **Phases.** A doc the phases are designed in (`--phase-doc`), or none (`--no-phases`).
-- **Spike folder.** Where spikes are quarantined. The default is `test-vehicles/`.
+- **Spike folder.** Where spikes are quarantined (`--quarantine`). The default is
+  `test-vehicles/`.
+- **Dev prompts.** The private repo they live in (`--devlog`). The default is this repo's name
+  plus `-devlog`.
 - **Model.** The model a leg is sized for, the way `plan.md` should name it (`--model`).
 - **The ADR number,** when the scan shows a reservation, or records named some other way
   (`--adr-file`). Also `--decisions`, when the records live somewhere other than
   `docs/decisions/`.
-- **Brownfield only:** which old sprints are finished, and whether they are grandfathered (they
-  keep their numbers, in one archive file) or converted. Default to grandfathering: IDs for
-  finished sprints that all resolve into one archive buy nothing. Then `--counter-start` is the
-  number of the last finished one, plus one.
+- **Brownfield only:** which old sprints are finished. Finished ones are grandfathered: they keep
+  their numbers, in one archive file, because IDs for finished sprints that all resolve into one
+  archive buy nothing. `--counter-start` is the number of the last finished one, plus one.
 
 ## 3. Init
 
@@ -61,56 +63,65 @@ python3 <kit>/scripts/sprinter.py init --greenfield --no-phases --model "<the mo
 python3 <kit>/scripts/sprinter.py init --brownfield --phase-doc docs/roadmap.md --counter-start 13 --model "<the model line>"
 ```
 
-init adds files and edits none. If any file it would write exists already, it stops and writes
-nothing. It prints what it wrote, what it left alone, and every blank still open, with a line
-number.
+init adds files and edits none. If anything it would write is in the way, it stops and writes
+nothing. It prints what it wrote, the defaults it used, what it left alone, and every blank still
+open, with a line number.
 
 ## 4. Fill the blanks
 
 Fill each blank init listed, from the person's answers:
 
 - `{{phase-list}}`: one bullet per phase, each linking its heading in the phase doc.
-- A `<!-- kit:phases -->` block that is still there means phases went undecided. Ask, then keep
-  the block's content and delete its markers, or delete block and markers together.
-- Brownfield blanks (`{{legacy-range}}`, `{{legacy-archive}}`, `{{adoption-sprint}}`) get filled
-  during the migration in step 5b, as the answers come to exist.
+- A `<!-- kit:phases -->` marker that is still there means phases went undecided. Ask. Then keep
+  what the markers wrap and delete the markers, or delete both.
 - If init left the decisions index alone, add the row it printed to the repo's own index.
+- Brownfield: `{{adoption-sprint}}` gets filled in step 5b. `{{legacy-range}}` and
+  `{{legacy-archive}}` wait for leg a of the migration, which creates the archive they name.
 
-Done when the `git grep` init printed at the end returns nothing.
+Done when the `git grep` line init printed returns nothing. Brownfield: nothing but the two
+legacy blanks that leg a fills.
 
 ## 5a. Greenfield: stub the first sprint, if the person names one
 
 - Take the ID from `python3 <kit>/scripts/sprinter.py id`. Never type an ID yourself.
 - Copy `docs/sprints/sprint-template.md` to `docs/sprints/remaining/sprint-<id>-<short-name>.md`.
-  Fill the title, the ID and one sentence, and delete the comments. A stub is a legal sprint.
+  Keep the title, the ID block and one sentence, and delete everything below them. That is a
+  stub, and a stub is a legal sprint.
 - Add its row to `plan.md`'s Order table.
 
 Planning it past a stub is a planning session's job, not this one's.
 
-## 5b. Brownfield: the migration is the first sprint
+## 5b. Brownfield: plan the migration as the first sprint, then stop
 
 The move to the new system is itself a sprint. `<kit>/examples/sprint-013-603d20-adopt-adr-021.md`
 is application-pipeline's, and it is the model.
 
-- Stub `docs/sprints/remaining/sprint-<id>-adopt-adr-<NNN>.md`, Kind migration, and put its tag in
-  `{{adoption-sprint}}`.
-- Take IDs in bulk as you need them: `python3 <kit>/scripts/sprinter.py id --count 20`.
-- Cut it into legs from this list, each sized to one sitting:
-  - **leg a, the plan becomes `docs/sprints/` (migration).** One file per sprint, content
-    verbatim, checked line for line. Finished sprints move with `git mv` into one archive file
-    in `completed/`, which fills `{{legacy-archive}}` and `{{legacy-range}}`. Old housekeeping and
-    tech debt move into `housekeeping.md` and `techdebt.md`, a generated ID replacing each old
-    number. `plan.md` takes the order, the dependencies and the completed log. Prose references
-    become tags. README and anything else that linked the old plan point at `plan.md`.
+- Stub `docs/sprints/remaining/sprint-<id>-adopt-adr-<NNN>.md` with Kind migration, give it a row
+  in `plan.md`, and put its tag in `{{adoption-sprint}}`. Take IDs from
+  `python3 <kit>/scripts/sprinter.py id`, and `--count 20` when the migration needs many.
+- Cut it into these legs, each sized to one sitting:
+  - **leg a, the plan becomes `docs/sprints/` (migration).**
+    - `git mv` the old plan file to `docs/sprints/completed/<archive-name>.md`, so its history
+      follows the finished sprints. When finished and open sprints live in separate files, move
+      only the finished one. When nothing in it is finished, skip the archive, `git rm` the old
+      file once the next step empties it, and delete the lines that name old sprints.
+    - Cut each open sprint out of the archive into its own `remaining/sprint-<id>-<short-name>.md`,
+      content verbatim. The archive keeps only the finished sprints.
+    - Fill `{{legacy-archive}}` and `{{legacy-range}}`.
+    - Move old housekeeping and tech debt into `housekeeping.md` and `techdebt.md`, a generated
+      ID replacing each old number.
+    - `plan.md` takes the order, the dependencies and the completed log. Prose references become
+      tags. README and anything else that linked the old plan point at `plan.md`.
+    - Prove the move with the two proofs under Watches: the archive and the new sprint files
+      together hold every non-empty line of the old plan, in the old order.
   - **leg b, source comes under the same rules (refactor).** Every banned word in source becomes
     a cleanup marker naming a leg, a filed `[h-` or `[t-` item, or a plain present-tense comment.
     Deciding where each one belongs is the work; the sed is not.
-- When the scan found one plan doc and roughly twenty lines to touch, run the legs here, one at a
-  time, handing each off the way the handbook says. Otherwise stop after writing leg a's reading
-  list from `docs/reading/reading-list-template.txt`, and the person runs leg a in a fresh
-  session.
-- Put "the `git grep` init printed returns nothing" in the last leg's done-when list, so the
+- Copy the `git grep` line init printed, word for word, into the last leg's done-when list. The
   migration blanks close with the sprint that fills them.
+- Write leg a's reading list from `docs/reading/reading-list-template.txt`, and stop there. The
+  person runs each leg in a fresh session. The handbook keeps planning and coding in separate
+  sessions, and the legs stage files with `git mv`, which this session must not.
 
 ## Watches
 
@@ -135,8 +146,10 @@ Each of these went wrong once, in application-pipeline's migration.
 
 - [ ] every scan finding is migrated, filed, or confirmed as nothing to do (brownfield: or owned
       by a leg of the adoption sprint)
-- [ ] the `git grep` init printed returns nothing (brownfield: nothing but the blanks the
-      adoption sprint's last leg owns)
+- [ ] the `git grep` line init printed returns nothing (brownfield: nothing but the two legacy
+      blanks that leg a fills)
 - [ ] the handbook has its row in the decisions index
+- [ ] brownfield: the adoption sprint has its file, its legs, its `plan.md` row, and a reading
+      list for leg a
 - [ ] no CLAUDE.md or AGENTS.md was written or changed
 - [ ] the person has the list of files to review, and nothing is staged

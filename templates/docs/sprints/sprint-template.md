@@ -5,9 +5,9 @@ Copy it to remaining/sprint-<id>-<short-name>.md. Take the ID from sprinter-kit'
 or from `openssl rand -hex 3` and the checks in {{adr}}'s "IDs and file names". Add the sprint's
 row to plan.md in the same commit.
 
-A stub is a legal sprint: the title, the ID block and one sentence are enough to exist, and a
-sprint gets its file as soon as it has a name. Everything from Kind down gets written when the
-sprint is planned, in a session of its own.
+A stub is a legal sprint, and a sprint gets its file as soon as it has a name. For a stub, keep
+the title, the ID block and one sentence, and delete everything below them. Everything from Kind
+down gets written when the sprint is planned, in a session of its own.
 
 Delete every comment as you fill it in. Delete any block that has nothing to say.
 -->

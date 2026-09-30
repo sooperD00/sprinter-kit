@@ -80,18 +80,23 @@ less often.
 The handbook is ADR-021 from application-pipeline at `8185187`, changed only here:
 
 1. The number, date and status became blanks. The status records the kit commit.
-2. Phases became an option: the Phase row and its Why bullet go when a project has none.
+2. Phases became an option: the Phase row and its Why bullet go when a project has none. The Phase
+   row's link to `implementation-plan.md` became the phase-doc blanks.
 3. The spike folder became a blank, defaulting to `test-vehicles/`.
 4. The layout gained `sprint-template.md` and `reading-list-template.txt`, and a line saying they
-   are starting points, never records.
+   are starting points, never records. The Reading lists section says to start from the template.
 5. The Phase 0 archive and "Sprints 1 through 12" became brownfield-only blanks.
-6. IDs: "reads as a number" covers `4194e9`, and the in-use check is `git grep --untracked`.
+6. IDs: "reads as a number" covers `4194e9`, the in-use check is `git grep --untracked`, and the
+   first ID step points at `sprinter.py id`.
 7. "Two kinds of prompt" lost its application-specific half. "Public" became "live here", since a
-   private repo's plan is not public.
-8. Consequences point the tooling at the kit. Alternatives name application-pipeline as where the
-   117 edits happened, instead of claiming the system replaced something in every repo.
+   private repo's plan is not public. `<this-repo-name>-devlog` became the devlog blank.
+8. Consequences point the tooling at the kit. Both Alternatives that quote figures name
+   application-pipeline as where they happened (117 edits, 1,180 lines), instead of claiming them
+   for every repo.
 9. The Migration section became a pointer to the repo's own adoption sprint. Its steps are
    SKILL.md's brownfield path now.
+10. Housekeeping's provenance example lost its "today", which was true only in
+    application-pipeline.
 
 Item 6 is worth carrying back to application-pipeline's ADR-021 by hand. Its tech debt already
 holds `[t-4194e9]`.

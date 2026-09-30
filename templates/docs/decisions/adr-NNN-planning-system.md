@@ -133,7 +133,7 @@ docs/reading/reading-list-template.txt           copy it to start a list
 - Place a cleanup marker the moment you leave something for later, naming the leg that will remove it. If no leg owns it yet, file it in `housekeeping.md` or `techdebt.md` and cite that ID instead — never leave the comment as the only record.
 - Add a Watch when you hit a trap, where the work is.
 
-Two kinds of prompt get confused, so they are named here. **App prompts** ship with the product and go to a model while it runs; they are code, and they live wherever the code does. **Dev prompts** are assembled by hand from private templates to build this project; they are IP, they live in the private `{{project}}-devlog` repo, and nothing here reproduces them. The planning artifacts that *do* live here are the sprint files, `plan.md`, and the reading lists.
+Two kinds of prompt get confused, so they are named here. **App prompts** ship with the product and go to a model while it runs; they are code, and they live wherever the code does. **Dev prompts** are assembled by hand from private templates to build this project; they are IP, they live in the private `{{devlog}}` repo, and nothing here reproduces them. The planning artifacts that *do* live here are the sprint files, `plan.md`, and the reading lists.
 
 ## Hand off a leg
 
@@ -196,7 +196,7 @@ Do not reconcile these against each other or against `git log`. They measure dif
 
 **Alternatives considered**
 - **Numbers that mean order.** On application-pipeline, where this system was worked out, inserting one sprint cost 117 edits across four documents on 2026-09-19, and no regex can tell a bare sprint number from a test count.
-- **One long plan document.** Cheap to grep, but it hands a reader 1,180 lines to use 200 of them, and closing a sprint means copy-pasting it into a second long document.
+- **One long plan document.** Cheap to grep, but application-pipeline's handed a reader 1,180 lines to use 200 of them, and closing a sprint meant copy-pasting it into a second long document.
 - **A file per leg.** Too fine. Legs are planned and read together, and the appetite rule already caps a leg at one sitting.
 
 <!-- kit:brownfield -->
