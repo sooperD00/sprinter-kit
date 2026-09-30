@@ -171,7 +171,7 @@ Options: `greenfield`, `brownfield` (always decided, by the mode), and `phases` 
 | `{{adr}}`, `{{adr-num}}`, `{{adr-file}}`, `{{adr-path}}`, `{{adr-link}}` | the next free ADR number, `--adr` or `--adr-file` |
 | `{{date}}` | today, or `--date` |
 | `{{kit}}` | `sprinter-kit@<short sha>` of the kit clone that ran init |
-| `{{project}}` | the origin remote's repo name, or the folder's |
+| `{{devlog}}` | `--devlog`, default the origin remote's repo name (or the folder's) plus `-devlog` |
 | `{{model}}` | `--model` |
 | `{{quarantine}}` | `--quarantine`, default `test-vehicles/` |
 | `{{phase-doc}}`, `{{phase-doc-name}}` | `--phase-doc` |
@@ -191,14 +191,23 @@ It writes LF and UTF-8 on every platform.
 | `id [--count N]` | prints fresh IDs on stdout, one per line | 0, or 2 couldn't check |
 
 init options: `--decisions DIR` (default `docs/decisions`), `--adr N`, `--adr-file NAME`,
-`--phase-doc PATH` or `--no-phases`, `--quarantine DIR`, `--model TEXT`, `--counter-start N`
-(brownfield only, 1 to 999), `--date YYYY-MM-DD`. A path may be repo-relative, or absolute when
-it points inside the repo. A path outside the repo is refused.
+`--phase-doc PATH` or `--no-phases`, `--quarantine DIR`, `--devlog NAME`, `--model TEXT`,
+`--counter-start N` (brownfield only, 1 to 999), `--date YYYY-MM-DD`. A path may be
+repo-relative, or absolute when it points inside the repo. A path outside the repo is refused.
+init prints every default it used, so a wrong one gets seen.
 
 init copies every file under `templates/` except the junk an OS or editor leaves behind
 (`.DS_Store`, `Thumbs.db`, swap files, any dotfile but `.gitkeep`).
 
-init stops before writing anything when a file it would write already exists, when the ADR number
-is taken, or when the repo names its records some other way and `--adr-file` is missing. When the
-decisions folder already has records or an index, init leaves `README.md` and
-`adr-000-adr-template.md` alone and prints the index row to add.
+init stops before writing anything when:
+
+- the decisions folder already holds a `*-planning-system.md` (a repo takes the handbook once)
+- a file it would write exists already, a dangling symlink included
+- a folder on the way is a file, or a symlinked folder would carry a write outside the repo
+- the ADR number is taken, or the repo names its records some other way and `--adr-file` is
+  missing
+
+When the decisions folder already has records or an index, init leaves `README.md` and
+`adr-000-adr-template.md` alone and prints the index row to add. It warns when git ignores any
+file it wrote. The `git grep` line it prints searches ignored files too
+(`--no-exclude-standard`), so an ignored `docs/` cannot hide a blank.

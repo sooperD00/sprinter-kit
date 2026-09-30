@@ -26,6 +26,7 @@ What each command answers
 """
 import argparse
 import datetime
+import os
 import re
 import secrets
 import shlex
@@ -70,7 +71,8 @@ HELP = {
     "phase-list": "one bullet per phase, each linking its heading in the phase doc",
     "quarantine": "the folder spikes are quarantined in (--quarantine)",
     "counter": "the execution-order number the next closed sprint takes (--counter-start)",
-    "legacy-nnn": "the old sprints' execution-order range, e.g. 001-012 (--counter-start fills it)",
+    "legacy-nnn": "the old sprints' execution-order range, e.g. 001-012 (--counter-start fills it; "
+                  "none finished? delete the row)",
     "legacy-range": "what the old sprints are called, e.g. Sprints 1 through 12 (none finished? "
                     "delete every line that names them instead)",
     "legacy-archive": "the file in completed/ the finished old sprints were moved into",
@@ -164,12 +166,30 @@ def template_files():
 
 
 def link(target, source):
-    """Relative link from the file at `source` to `target`, both repo-relative POSIX paths."""
+    """Relative link from the file at `source` to `target`, both repo-relative POSIX paths. A space
+    is written %20, since a bare space ends a Markdown link."""
     t, s = PurePosixPath(target).parts, PurePosixPath(source).parent.parts
     i = 0
     while i < min(len(t), len(s)) and t[i] == s[i]:
         i += 1
-    return "/".join([".."] * (len(s) - i) + list(t[i:])) or "."
+    return ("/".join([".."] * (len(s) - i) + list(t[i:])) or ".").replace(" ", "%20")
+
+
+def blocked(root, out):
+    """Why init can't write repo-relative `out`, or None. Checked for every file before any is
+    written: a path that exists (a dangling symlink included), a folder on the way that is a file,
+    or a symlinked folder that would carry the write outside the repo."""
+    dest = root / out
+    if os.path.lexists(dest):
+        return f"{out} exists already"
+    for parent in list(PurePosixPath(out).parents)[:-1]:
+        if os.path.lexists(root / parent) and not (root / parent).is_dir():
+            return f"{parent} is a file, and {out} needs it to be a folder"
+    try:
+        dest.resolve().relative_to(root)
+    except ValueError:
+        return f"{out} would land outside the repo, through a symlinked folder"
+    return None
 
 
 # ---------------------------------------------------------------- suspects
@@ -271,6 +291,9 @@ def cmd_scan(a):
                   f"{min(nums):0{w}d}-{max(nums):0{w}d}, next free number {max(nums) + 1:0{w}d}")
             if odd:
                 print(f"               named like {odd[0]}, not adr-NNN-name.md: init needs --adr-file")
+            for _, name in recs:
+                if name.lower().endswith("-planning-system.md"):
+                    print(f"               {name} is the handbook, here already, so init will refuse")
             index = root / d / "README.md"
             if index.is_file():
                 lines = index.read_text(encoding="utf-8", errors="replace").split("\n")
@@ -320,9 +343,11 @@ def cmd_scan(a):
               f"e.g. {tagged[0][0]}:{tagged[0][1]}")
 
     migrate = bool(plans or logs or banned or numbered)
+    adopted = adopted or any(name.lower().endswith("-planning-system.md")
+                             for recs in folders.values() for _, name in recs)
     print()
     if adopted:
-        print("This repo is set up already. Nothing for init to do.")
+        print("This repo is set up already, at least in part. init will refuse to write.")
     elif migrate:
         print("Looks brownfield: there is a plan or tagged source to migrate. The mode is yours to pick.")
     else:
@@ -405,9 +430,22 @@ def cmd_init(a):
         raise CantCheck(f"--date wants YYYY-MM-DD (got {a.date!r})")
     decisions = rel_path(root, a.decisions, "--decisions")
     phase_doc = rel_path(root, a.phase_doc, "--phase-doc").as_posix() if a.phase_doc else None
-    quarantine = rel_path(root, a.quarantine, "--quarantine").as_posix() + "/" if a.quarantine else None
+    defaults = []
+    if a.quarantine is None:
+        a.quarantine = "test-vehicles/"
+        defaults.append(("--quarantine", a.quarantine, "the folder spikes are quarantined in"))
+    quarantine = rel_path(root, a.quarantine, "--quarantine").as_posix() + "/"
+    if a.devlog is None:
+        a.devlog = repo_name(root) + "-devlog"
+        defaults.append(("--devlog", a.devlog, "the private repo the dev prompts live in"))
+    if not TEMPLATES.is_dir() or not any(True for _ in template_files()):
+        raise CantCheck(f"there are no templates at {short(TEMPLATES)}. Is this a full copy of the kit?")
 
     records = adr_records(root / decisions)
+    handbooks = [n for _, n in records if n.lower().endswith("-planning-system.md")]
+    if handbooks:
+        raise CantCheck(f"{decisions}/{handbooks[0]} is here already, and a repo takes the handbook once. "
+                        "Finish the setup by hand, or delete it first.")
     fresh = not records and not (root / decisions / "README.md").exists()
     if a.adr_file:
         name = PurePosixPath(a.adr_file).name
@@ -443,10 +481,10 @@ def cmd_init(a):
                 left.append((decisions / leaf).as_posix())
         else:
             writes.append((t, rel))
-    in_the_way = [out for _, out in writes if (root / out).exists()]
+    in_the_way = [why for _, out in writes if (why := blocked(root, out))]
     if in_the_way:
-        raise CantCheck("init writes nothing when a file is in the way, and these exist already:\n"
-                        + "\n".join(f"  {p}" for p in in_the_way))
+        raise CantCheck("init writes nothing when something is in the way:\n"
+                        + "\n".join(f"  {why}" for why in in_the_way))
 
     options = {"greenfield": not brown, "brownfield": brown}
     if phase_doc:
@@ -462,7 +500,7 @@ def cmd_init(a):
         "adr-link": lambda out: link(adr_rel, out),
         "date": date,
         "kit": kit_version(),
-        "project": repo_name(root),
+        "devlog": a.devlog,
         "model": a.model,
         "quarantine": quarantine,
         "counter": f"{start:03d}" if start else None,
@@ -471,13 +509,24 @@ def cmd_init(a):
         "phase-doc-name": PurePosixPath(phase_doc).name if phase_doc else None,
     }
 
-    found = {}
+    try:  # advisory only, so a git that can't answer never stops the write
+        out = git(root, "-c", "core.quotePath=false", "check-ignore", *[o for _, o in writes], ok=(0, 1)).stdout
+        ignored = [p for p in out.split("\n") if p]
+    except CantCheck:
+        ignored = []
+
+    found, written = {}, []
     for t, out in writes:
         text = render(t.read_text(encoding="utf-8"), values, options, out)
         dest = root / out
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        with open(dest, "w", encoding="utf-8", newline="\n") as f:
-            f.write(text)
+        try:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            with open(dest, "w", encoding="utf-8", newline="\n") as f:
+                f.write(text)
+        except OSError as e:
+            raise CantCheck(f"stopped partway, writing {out}: {e}\nWritten before it stopped:\n"
+                            + "\n".join(f"  {p}" for p in written))
+        written.append(out)
         for n, key in blanks(text):
             found.setdefault(key, []).append(f"{out}:{n}")
 
@@ -487,6 +536,14 @@ def cmd_init(a):
     print(f"Wrote {plural(len(writes), 'file')}:")
     for _, out in writes:
         print(f"  {out}")
+    if ignored:
+        print("\ngit ignores these, so they won't be committed until .gitignore lets them through:")
+        for p in ignored:
+            print(f"  {p}")
+    if defaults:
+        print("\nFilled with defaults. If one is wrong, fix it where it landed:")
+        for flag, value, what in defaults:
+            print(f"  {flag:<16} {value}  ({what})")
     if left:
         print(f"\nNot written, because {decisions}/ already has records or an index of its own")
         print("(the kit's copies are in its templates/ folder, if you want them):")
@@ -505,7 +562,7 @@ def cmd_init(a):
                 print(f"      {w}")
         print("\nWhen they are filled, this returns nothing:")
         paths = " ".join(shlex.quote(p) for p in (adr_rel, "docs/sprints", "docs/reading"))
-        print(f"  git grep --untracked -nE '\\{{\\{{[a-z-]+\\}}\\}}|<!-- /?kit:' -- {paths}")
+        print(f"  git grep --untracked --no-exclude-standard -nE '\\{{\\{{[a-z-]+\\}}\\}}|<!-- /?kit:' -- {paths}")
     print("\nNothing is staged or committed.")
     return 1 if found else 0
 
@@ -572,8 +629,10 @@ def main():
     phases = i.add_mutually_exclusive_group()
     phases.add_argument("--phase-doc", metavar="PATH", help="the doc the phases are designed in, repo-relative")
     phases.add_argument("--no-phases", action="store_true", help="the project has no phases; drop them everywhere")
-    i.add_argument("--quarantine", default="test-vehicles/", metavar="DIR",
-                   help="the folder spikes are quarantined in (default: %(default)s)")
+    i.add_argument("--quarantine", metavar="DIR",
+                   help="the folder spikes are quarantined in (default: test-vehicles/)")
+    i.add_argument("--devlog", metavar="NAME",
+                   help="the private repo the dev prompts live in (default: <this repo's name>-devlog)")
     i.add_argument("--model", metavar="TEXT",
                    help='the model a leg is sized for, the way plan.md should name it, e.g. "Claude Opus 5 Max Thinking"')
     i.add_argument("--counter-start", type=int, metavar="N",
