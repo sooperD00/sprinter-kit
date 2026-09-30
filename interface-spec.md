@@ -192,7 +192,11 @@ It writes LF and UTF-8 on every platform.
 
 init options: `--decisions DIR` (default `docs/decisions`), `--adr N`, `--adr-file NAME`,
 `--phase-doc PATH` or `--no-phases`, `--quarantine DIR`, `--model TEXT`, `--counter-start N`
-(brownfield only), `--date YYYY-MM-DD`.
+(brownfield only, 1 to 999), `--date YYYY-MM-DD`. A path may be repo-relative, or absolute when
+it points inside the repo. A path outside the repo is refused.
+
+init copies every file under `templates/` except the junk an OS or editor leaves behind
+(`.DS_Store`, `Thumbs.db`, swap files, any dotfile but `.gitkeep`).
 
 init stops before writing anything when a file it would write already exists, when the ADR number
 is taken, or when the repo names its records some other way and `--adr-file` is missing. When the

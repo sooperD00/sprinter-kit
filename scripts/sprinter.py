@@ -28,6 +28,7 @@ import argparse
 import datetime
 import re
 import secrets
+import shlex
 import subprocess
 import sys
 from pathlib import Path, PurePosixPath
@@ -70,7 +71,8 @@ HELP = {
     "quarantine": "the folder spikes are quarantined in (--quarantine)",
     "counter": "the execution-order number the next closed sprint takes (--counter-start)",
     "legacy-nnn": "the old sprints' execution-order range, e.g. 001-012 (--counter-start fills it)",
-    "legacy-range": "what the old sprints are called, e.g. Sprints 1 through 12",
+    "legacy-range": "what the old sprints are called, e.g. Sprints 1 through 12 (none finished? "
+                    "delete every line that names them instead)",
     "legacy-archive": "the file in completed/ the finished old sprints were moved into",
     "adoption-sprint": "the tag of the sprint that migrates this repo, e.g. [s-<id>]",
     "kit:phases": "phases undecided: keep what the markers wrap and delete the markers, or delete both",
@@ -131,12 +133,34 @@ def repo_files(root):
     return sorted({p for p in out.split("\0") if p and (root / p).is_file()})
 
 
-def rel_path(arg, flag):
-    """A repo-relative POSIX path from what someone typed, or a refusal."""
-    p = PurePosixPath(arg.replace("\\", "/").strip("/"))
-    if p.is_absolute() or ".." in p.parts or not p.parts:
+def rel_path(root, arg, flag):
+    """A repo-relative POSIX path from what someone typed, or a refusal. An absolute path is fine
+    when it points inside the repo; one that points outside is refused, never quietly re-rooted."""
+    raw = arg.strip()
+    if raw.startswith(("/", "\\", "~")) or re.match(r"^[A-Za-z]:[\\/]", raw):
+        try:
+            raw = Path(raw).expanduser().resolve().relative_to(root).as_posix()
+        except ValueError:
+            raise CantCheck(f"{flag} wants a path inside the repo, and {arg!r} is outside it")
+    p = PurePosixPath(*[part for part in raw.replace("\\", "/").split("/") if part not in ("", ".")])
+    if ".." in p.parts or not p.parts:
         raise CantCheck(f"{flag} wants a path inside the repo, like docs/decisions (got {arg!r})")
     return p
+
+
+JUNK = re.compile(r"^(\..*|Thumbs\.db|desktop\.ini|.*~|.*\.sw[op]|.*\.py[co])$", re.I)
+
+
+def template_files():
+    """Every file under templates/ except the junk an OS or an editor leaves behind, like Finder's
+    .DS_Store. A template that starts with a dot is junk too, apart from .gitkeep."""
+    for t in sorted(TEMPLATES.rglob("*")):
+        rel = t.relative_to(TEMPLATES)
+        if not t.is_file() or "__pycache__" in rel.parts:
+            continue
+        if any(JUNK.match(part) and part != ".gitkeep" for part in rel.parts):
+            continue
+        yield t, rel.as_posix()
 
 
 def link(target, source):
@@ -371,14 +395,18 @@ def cmd_init(a):
     brown = a.brownfield
     if a.counter_start is not None and not brown:
         raise CantCheck("--counter-start is for --brownfield: a greenfield counter starts at 001")
+    if a.counter_start is not None and not 1 <= a.counter_start <= 999:
+        raise CantCheck(f"--counter-start wants a number from 1 to 999 (got {a.counter_start})")
     if a.adr is not None and a.adr_file:
         raise CantCheck("pass --adr or --adr-file, not both")
     try:
         date = datetime.date.fromisoformat(a.date).isoformat() if a.date else datetime.date.today().isoformat()
     except ValueError:
         raise CantCheck(f"--date wants YYYY-MM-DD (got {a.date!r})")
+    decisions = rel_path(root, a.decisions, "--decisions")
+    phase_doc = rel_path(root, a.phase_doc, "--phase-doc").as_posix() if a.phase_doc else None
+    quarantine = rel_path(root, a.quarantine, "--quarantine").as_posix() + "/" if a.quarantine else None
 
-    decisions = rel_path(a.decisions, "--decisions")
     records = adr_records(root / decisions)
     fresh = not records and not (root / decisions / "README.md").exists()
     if a.adr_file:
@@ -404,10 +432,7 @@ def cmd_init(a):
     adr_rel = (decisions / name).as_posix()
 
     writes, left = [], []
-    for t in sorted(TEMPLATES.rglob("*")):
-        if not t.is_file():
-            continue
-        rel = t.relative_to(TEMPLATES).as_posix()
+    for t, rel in template_files():
         if rel.startswith("docs/decisions/"):
             leaf = rel[len("docs/decisions/"):]
             if leaf == "adr-NNN-planning-system.md":
@@ -423,7 +448,6 @@ def cmd_init(a):
         raise CantCheck("init writes nothing when a file is in the way, and these exist already:\n"
                         + "\n".join(f"  {p}" for p in in_the_way))
 
-    phase_doc = rel_path(a.phase_doc, "--phase-doc").as_posix() if a.phase_doc else None
     options = {"greenfield": not brown, "brownfield": brown}
     if phase_doc:
         options["phases"] = True
@@ -440,7 +464,7 @@ def cmd_init(a):
         "kit": kit_version(),
         "project": repo_name(root),
         "model": a.model,
-        "quarantine": rel_path(a.quarantine, "--quarantine").as_posix() + "/" if a.quarantine else None,
+        "quarantine": quarantine,
         "counter": f"{start:03d}" if start else None,
         "legacy-nnn": f"001–{start - 1:03d}" if start and start > 1 else None,
         "phase-doc": (lambda out: link(phase_doc, out)) if phase_doc else None,
@@ -480,7 +504,8 @@ def cmd_init(a):
             for w in where:
                 print(f"      {w}")
         print("\nWhen they are filled, this returns nothing:")
-        print(f"  git grep --untracked -nE '\\{{\\{{[a-z-]+\\}}\\}}|<!-- /?kit:' -- {adr_rel} docs/sprints docs/reading")
+        paths = " ".join(shlex.quote(p) for p in (adr_rel, "docs/sprints", "docs/reading"))
+        print(f"  git grep --untracked -nE '\\{{\\{{[a-z-]+\\}}\\}}|<!-- /?kit:' -- {paths}")
     print("\nNothing is staged or committed.")
     return 1 if found else 0
 
