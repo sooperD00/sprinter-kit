@@ -14,7 +14,7 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 
 | NNN | id | name | status | depends on | reading list |
 |-----|----|------|--------|------------|--------------|
-| | `[s-b57080]` | [Essay and field guide templates](remaining/sprint-b57080-essay-field-guide.md) | planned | — | — |
+| | `[s-b57080]` | [Essay and field guide templates](remaining/sprint-b57080-essay-field-guide.md) | planned | — | [leg a](../reading/reading-list-for-b57080-a.txt), 2026-10-06 |
 | | `[s-a0f5d1]` | [Review files as a shipped decision record](remaining/sprint-a0f5d1-review-files.md) | planned | — | — |
 | | `[s-b34c63]` | [Prompts parameterized by project files, and docs for the kit's wider scope](remaining/sprint-b34c63-prompts-project-state.md) | planned | [s-a0f5d1] | — |
 | | `[s-48ba8b]` | [Reading lists moved under sprints and converted to Markdown](remaining/sprint-48ba8b-reading-lists-move.md) | planned | [s-b34c63] | — |

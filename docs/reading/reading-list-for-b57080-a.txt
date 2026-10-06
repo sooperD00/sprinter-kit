@@ -1,0 +1,119 @@
+READING LIST — [s-b57080-a]: the essay and field guide templates, and init leaving a project's own copies alone
+Written 2026-10-06 against main at dabab4d, plus this sprint's plan commit. If main has moved much, regenerate it.
+Reading cost: about 18,000 tokens. About 2,000 are the handbook, 1,600 the sprint file, and the
+rest the code and docs this leg changes.
+
+
+THE ONE RULE
+
+  This leg adds two templates and one rule: init leaves a project's own essay and field guide
+  alone. It changes nothing else about what init writes or what stops it. If you find yourself
+  editing another template, the handbook, or any other rule about what stops init, stop. That
+  is another sprint. one-big-map is leg b's, and nothing in this leg comes from it.
+
+
+BEFORE YOU START
+
+  Run these. If one comes back wrong, say which and stop.
+
+    git branch --show-current                       leg/b57080-a
+    git status --porcelain                          empty
+    git log -1 --format=%s -- docs/reading/reading-list-for-b57080-a.txt
+                                                    the plan commit that wrote this list
+    ls templates/docs/ESSAY.md templates/docs/field-guide.md
+                                                    No such file, for both
+    python3 scripts/sprinter.py --help              exits 0
+
+
+WHAT YOU ARE DOING
+
+  The sprint file's Commits table for leg a: the ground truth first, then three commits. Its
+  first Watch says why the order matters: the rule lands before the templates, so no commit
+  makes init refuse a repo that already has an essay. Group your changes the same way when you
+  report; you don't commit.
+
+
+READ THIS
+
+  docs/sprints/remaining/sprint-b57080-essay-field-guide.md      all of it
+
+    Leg a is yours. Read Decisions D1 to D5 twice: they are the design, and they were settled
+    with the person. Read the Watches twice. Leg b is not yours.
+
+  docs/decisions/adr-010-planning-system.md      these sections
+
+    Vocabulary, including the Landed, Checklist marks and Entry gate paragraphs
+    Referring to a sprint
+    Tags in source
+    Run a sprint
+    Hand off a leg
+    Housekeeping and tech debt, plus the ID rule in IDs and file names
+
+    Skip the rest. Planning, closing and ordering belong to whoever plans and closes,
+    which is not this session.
+
+  Files you will edit:
+
+    scripts/sprinter.py            template_files(), blocked(), cmd_init() from where it builds
+                                   `writes, left` to its report, and cmd_scan()'s report lines.
+                                   Not cmd_id(), and not the suspect checks (grep, fenced, real).
+    README.md                      "What's in it", and the paragraph after it
+    interface-spec.md              Files, Kit blanks, and the sprinter.py section's list of
+                                   what stops init
+    design.md                      "Templates mirror the target tree", and wherever the why
+                                   of these two files reads best
+    SKILL.md                       "3. Init"
+    templates/docs/ESSAY.md        new
+    templates/docs/field-guide.md  new
+
+  Files you read but do not edit:
+
+    templates/docs/decisions/adr-000-adr-template.md   the house style for a template's
+                                                       HOW TO comment
+    templates/docs/sprints/sprint-template.md          the same, for placeholder prose
+    docs/ESSAY.md                                      the kit's own essay: a filled example,
+                                                       in a different shape. Don't copy it.
+
+
+DO NOT READ
+
+  ../one-big-map/, or anything outside this repo     Leg b's. The Watches say why its
+                                                     content must not shape the templates.
+  prompts/                                           prompt6 and prompt7 restate the field
+                                                     guide's rules; changing them is
+                                                     [s-b34c63]'s work.
+  examples/                                          application-pipeline's files. Nothing
+                                                     here touches them.
+  docs/sprints/remaining/, except this sprint        other sprints' work
+  docs/sprints/drafts/                               drafts for other sprints
+  DEVLOG/                                            untracked notes
+
+  If you think you need something that is not on this list, ask, and say what
+  question you are trying to answer. Do not open it first and mention it after.
+
+
+WHAT THIS LIST CANNOT SEE
+
+  No Python 3.8 interpreter is installed here. The ast check in the done-when list stands in
+  for one, and it catches syntax only. A 3.9 method like str.removeprefix passes it, so read
+  for those yourself.
+
+  What the plan left open on purpose: the templates' exact wording, within D3, D4 and the
+  Watches; the name and shape of whatever lists the two project docs in sprinter.py; scan's
+  exact report line; and where design.md says why the two files ship. Each choice is worth a
+  line in the sprint file under the leg.
+
+  A rule this leg needs that no document cites. This list was assembled by reading,
+  so it names what one reader noticed.
+
+
+WHEN YOU ARE DONE
+
+  ADR-010's "Hand off a leg" is the checklist. In this leg's terms: check the done-when
+  items at the code rather than at the plan, write the leg's Landed note in the sprint
+  file, record the handoff date, file anything the leg shed into housekeeping.md or
+  techdebt.md with a generated ID, and confirm that `git grep --untracked 'SPRINT-b57080-a'`
+  comes back empty.
+
+  `sprinter.py id` refuses to run in the kit's own repo ([h-fec4e6]). Take IDs the handbook's
+  way: `openssl rand -hex 3`, with the checks in "IDs and file names".
