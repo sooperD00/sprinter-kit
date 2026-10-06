@@ -1,3 +1,8 @@
+# Notes on sizing model legs and gating design
+
+Draft for `[s-484bd5]`, and for the test habits in `[s-06c862]`. From DEVLOG, 2026-10-05, during one-big-map's faab97 leg-a coding session. Kept as written.
+
+```text
 10/5/2026 11:35a
 one-big-map-20261001: cc sprint-faab97-foundation.md -- leg a -- CODE
 sizing-appetite-modeling-and-design-gating-20261005.txt
@@ -95,3 +100,4 @@ questions does the checklist leave?", with a split when the answer is more than 
 	recommendation.
 
   When you've settled your thinking, I can draft this as a kit: item, or as a checklist section for the reading-list template. I'd wait until after your review of 3_6, since that will either confirm the list or add to it.
+```

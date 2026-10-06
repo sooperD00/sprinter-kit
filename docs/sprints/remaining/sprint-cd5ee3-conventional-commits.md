@@ -15,6 +15,7 @@ Adds a decision-record template that says the project uses Conventional Commits,
 
 **Why now** The prompts already ask for `docs:` and `plan:` prefixes, and nothing defines them. The kit's ESSAY cites Conventional Commits as the source of Kind.
 
+**Drafts:** [the record](../drafts/s-cd5ee3-adr-conventional-commits.md), and [the CI script](../drafts/s-cd5ee3-check-commit-msgs.sh) that ships with it.
 **Carry back:**
 - one-big-map, on branch `kit-sync/cd5ee3` — pending
 - this repo's own copies — pending

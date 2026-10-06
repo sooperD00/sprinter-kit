@@ -19,4 +19,5 @@ Puts the kit's own Python and Markdown under a linter, a formatter and commit ho
 
 **Watch** Match one-big-map's Ruff and pyright settings (`[h-2c3eb1]`, `[h-f7478e]`), so `[s-319ddd]` extracts one version, not two.
 
+**Drafts:** `[s-cd5ee3]`'s [CI script](../drafts/s-cd5ee3-check-commit-msgs.sh), which runs every commit-msg hook over a range of commits.
 **Carry back:** none. This is the kit's own tooling.
