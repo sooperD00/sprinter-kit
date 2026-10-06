@@ -58,18 +58,18 @@ Used by: `<module>`
 **<A claim about a term.>** <What it means, and where it bites.>
 ```
 
-## leg a — the templates, and init leaving a project's own copies alone (feature) --- in progress
+## leg a — the templates, and init leaving a project's own copies alone (feature) --- handed off 2026-10-06
 
 **Done when**
-- [ ] Before commit 1, the files `init --greenfield --no-phases --model test` writes into a fresh scratch repo are on record (commit 0). After the leg, the same command writes that list plus `docs/ESSAY.md` and `docs/field-guide.md`, and nothing else in the list changes.
-- [ ] In a scratch repo that already has `docs/ESSAY.md`, init writes everything else, leaves the essay unchanged (the same `git hash-object` before and after), lists it as left alone, and exits as it would in a repo without one.
-- [ ] A dangling symlink at `docs/ESSAY.md` still stops init: exit 2, nothing written.
-- [ ] scan, in the repo that has the essay, reports it as here already and the field guide as one init will write.
-- [ ] The two files init writes match their templates byte for byte (`cmp`), and `grep -n '{{' templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing.
-- [ ] `git grep --untracked -niE 'one-big-map|parcel|apn|crs84|faab97' -- templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing. (`templates/docs/decisions/ADR-NNN-review-files.md` still names faab97. `[s-a0f5d1]` leg b clears it.)
-- [ ] The essay's HOW TO comment says what goes in the file, how it differs from README and design.md, and to delete the comment. The field guide's line under its title says what goes in it, and its entry-rules comment holds the rules in D3 and says to keep it.
-- [ ] Each of these names both files: README ("What's in it", or the paragraph after it), interface-spec (Files, Kit blanks, and the list of what stops init), design.md (the exception to "anything in the way stops it", and why these two files ship) and SKILL.md (step 3: init writes both, and they are the person's to write).
-- [ ] `python3 -c "import ast; ast.parse(open('scripts/sprinter.py').read(), feature_version=(3, 8))"` passes.
+- [x] Before commit 1, the files `init --greenfield --no-phases --model test` writes into a fresh scratch repo are on record (commit 0). After the leg, the same command writes that list plus `docs/ESSAY.md` and `docs/field-guide.md`, and nothing else in the list changes.
+- [x] In a scratch repo that already has `docs/ESSAY.md`, init writes everything else, leaves the essay unchanged (the same `git hash-object` before and after), lists it as left alone, and exits as it would in a repo without one.
+- [x] A dangling symlink at `docs/ESSAY.md` still stops init: exit 2, nothing written.
+- [x] scan, in the repo that has the essay, reports it as here already and the field guide as one init will write.
+- [x] The two files init writes match their templates byte for byte (`cmp`), and `grep -n '{{' templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing.
+- [x] `git grep --untracked -niE 'one-big-map|parcel|apn|crs84|faab97' -- templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing. (`templates/docs/decisions/ADR-NNN-review-files.md` still names faab97. `[s-a0f5d1]` leg b clears it.)
+- [x] The essay's HOW TO comment says what goes in the file, how it differs from README and design.md, and to delete the comment. The field guide's line under its title says what goes in it, and its entry-rules comment holds the rules in D3 and says to keep it.
+- [x] Each of these names both files: README ("What's in it", or the paragraph after it), interface-spec (Files, Kit blanks, and the list of what stops init), design.md (the exception to "anything in the way stops it", and why these two files ship) and SKILL.md (step 3: init writes both, and they are the person's to write).
+- [x] `python3 -c "import ast; ast.parse(open('scripts/sprinter.py').read(), feature_version=(3, 8))"` passes.
 
 **Commits**
 | # | | |
@@ -78,6 +78,7 @@ Used by: `<module>`
 | 1 | `feat(init): leave a project's own essay and field guide alone` | the rule, and scan's report of it. No template exists yet, so no repo sees a change. |
 | 2 | `feat(templates): essay and field guide` | init now writes them where they're missing |
 | 3 | `docs: what init writes for a project's essay and field guide` | README, interface-spec, design.md, SKILL.md |
+| 4 | `docs(sprints): hand off s-b57080 leg a` | the done-when ticks, Choices, Landed and the handoff date |
 
 **Watch** The order is the safety property. The rule lands before the templates, so no commit makes init refuse a repo that already has an essay. Derive what scan reports from the templates that exist, so commit 1 changes nothing anyone can see.
 
@@ -88,6 +89,17 @@ Used by: `<module>`
 **Watch** Keep both templates thin. The field guide rests on one example, and the essay on two with different shapes. Give each its purpose, its rules and a skeleton, and nothing neither example has. Take nothing from one-big-map, whose domain would become the template's shape. Where an example helps, use a neutral one, like `## Dates (ISO 8601)`.
 
 **Watch** sprinter.py supports Python 3.8: no `str.removeprefix`, no `match`.
+
+**Choices**
+- `PROJECT_DOCS` in sprinter.py lists the two docs, as a tuple of repo-relative paths beside `JUNK`. `own_copy()` is the one test for a project's own copy, shared by scan and init so scan reports what init does. It uses `os.path.isfile`, which follows symlinks: a symlink to a file counts as a copy, and a dangling symlink or a folder falls through to `blocked()`.
+- init lists kept files under "Left alone, because the repo has its own", with the decisions block's pointer to the kit's `templates/` folder. The block sits just before the decisions block, so the two lists of files not written read together.
+- scan prints a `project docs` line for each shipped template, after `planning docs`: here already, not found, or `blocked()`'s reason followed by "so init will refuse to write".
+- The exception to the stop rule also went into sprinter.py's module docstring, which `--help` prints. The init subparser's help doesn't state the rule.
+- The templates write their placeholders as prose, the way sprint-template.md writes its title, with no angle brackets. Three of the outline's bracketed placeholders parsed as HTML tags and vanished when rendered, and the rest rendered only because each held a comma.
+- The field guide's comment carries D3's rules in D3's words, with the "Look for" list as bullets. It opens with "Keep this comment" and D3's reason.
+- design.md states the exception under "Templates mirror the target tree", and the why in a new section after it, "The essay and the field guide".
+
+**Landed.** Plan: the rule, then the templates, then the docs, so every commit leaves init working. Happened: the check against the code, before any write, found three gaps. D3's rules lived only in files the reading list barred, the term grep already failed on another template, and sprinter.py's docstring states the stop rule too. d9eba25 fixed the plan, and the leg then landed as planned, with the handoff as a fourth commit. Before review, the templates' placeholders moved from angle brackets to prose, and init's help now names the essay and field guide. Every done-when check passes in fresh scratch repos, and init's final file list is the ground truth plus the two docs. The Choices block is new structure: it holds the calls the plan left to the leg. Lesson: a reading list assembled by reading can bar the one file a decision rests on. Put a decision's substance in the sprint file, not a pointer to a file the leg may not open. An outline's notation is not template syntax: render a template before approving it.
 
 ## leg b — carry back to one-big-map (migration) --- planned
 
