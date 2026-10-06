@@ -11,11 +11,13 @@ Puts the kit's own Python and Markdown under a linter, a formatter and commit ho
 - b — linter and formatter config for `scripts/sprinter.py` and the Markdown, with one formatter-only commit listed in `.git-blame-ignore-revs`.
 - c — the hooks and the CI workflow.
 
-**Entry gate:** recommended `[s-cd5ee3]` before leg c, so the commit-message check has a rule to check.
+**Entry gate:** recommended `[s-cd5ee3]` before leg c, so the commit-message check has a rule to check. Leg a runs first: `[s-cd5ee3]` waits on it.
 
 **Why now** The kit ships a Python script with no checks on it, and the hooks design blocks the private-words guard.
 
 **Watch** Whatever leg a picks has to leave room for `[s-7cc4a8]`'s hook. Decide them together.
+
+**Watch** `[s-cd5ee3]`'s draft record builds on a pre-commit record that projects get (its `{{precommit-adr}}` blank), and no sprint ships one yet. Leg a decides whether this sprint does.
 
 **Watch** Match one-big-map's Ruff and pyright settings (`[h-2c3eb1]`, `[h-f7478e]`), so `[s-319ddd]` extracts one version, not two.
 

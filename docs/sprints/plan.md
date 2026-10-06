@@ -23,8 +23,8 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | | `[s-9abfbf]` | [Handbook wording and scan fixes](remaining/sprint-9abfbf-handbook-fixes.md) | planned | — | — |
 | | `[s-41a8b1]` | [Backlog prefixes and stack notes in planning](remaining/sprint-41a8b1-prefixes-stack-notes.md) | planned | — | — |
 | | `[s-484bd5]` | [Kinds for demos, design sessions and contracts](remaining/sprint-484bd5-kinds.md) | planned | — | — |
-| | `[s-cd5ee3]` | [Commit message conventions](remaining/sprint-cd5ee3-conventional-commits.md) | planned | — | — |
 | | `[s-2f14eb]` | [Commit hooks and linters for the kit](remaining/sprint-2f14eb-hooks-linters.md) | planned | — | — |
+| | `[s-cd5ee3]` | [Commit message conventions](remaining/sprint-cd5ee3-conventional-commits.md) | planned | — | — |
 | | `[s-7cc4a8]` | [Private-words guard and a setup guide](remaining/sprint-7cc4a8-private-words.md) | planned | [s-2f14eb] | — |
 | | `[s-319ddd]` | [Standing checks and the optional Python checks record](remaining/sprint-319ddd-standing-checks.md) | planned | [s-b34c63] | — |
 | | `[s-b0557c]` | [Agent reflection process](remaining/sprint-b0557c-reflection.md) | planned | — | — |
