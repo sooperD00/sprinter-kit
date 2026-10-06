@@ -1,3 +1,8 @@
+# Notes on writing and reviewing tests
+
+Draft for `[s-06c862]`. From DEVLOG, 2026-10-05, during one-big-map's faab97 leg-a review. Kept as written.
+
+```text
 10/5/26 12:13a
 adr-for-writing-tests-20261005.txt
 one-big-map-20261001: sprint-faab97-foundation.md -- leg a -- review 2
@@ -25,3 +30,4 @@ are you checking this thing -- should formalize that too.
 
 
 # Pass 2: Validity (does each test check what its name says?)
+```

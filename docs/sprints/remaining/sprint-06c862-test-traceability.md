@@ -7,7 +7,7 @@ Adds a collector that builds a traceability table for a review to fill in: each 
 
 **Kind:** feature, after a design leg.
 **Legs:**
-- a — design: where the table lives (a review file, or one per leg), its columns, and how a spec rule gets an ID. Start from the table the faab97 leg-a review produced by hand.
+- a — design: where the table lives (a review file, or one per leg), its columns, and how a spec rule gets an ID. Start from the table the faab97 leg-a review produced by hand, and the test habits in the sizing note: see each new test fail before the change, and write tests as rows traced to spec lines.
 - b — the collector for Python: test IDs from `pytest --collect-only -q`, classes and functions from the module under test, and missing lines from `pytest-cov --cov-report=term-missing`. It writes the table with the verdict cells empty. It's stack-specific, so it ships with the Python checks `[s-319ddd]` or as an init option of its own.
 - c — the review prompt calls it, and the handbook names the two passes: traceability (every spec rule maps to a test) and validity (each test checks what its name says).
 - d — carry back to one-big-map: a first run on `tests/contract/test_parcel.py`.
@@ -16,7 +16,8 @@ Adds a collector that builds a traceability table for a review to fill in: each 
 
 **Why now** The faab97 leg-a review found weak tests by hand, and the commands that check them already exist.
 
-**Brings in:** your note `adr-for-writing-tests-20261005.txt`, which can wait in `docs/sprints/drafts/`. Pass 2 is `[t-ce8ab9]`.
+**Brings in:** Pass 2 is `[t-ce8ab9]`.
+**Drafts:** [writing-tests notes](../drafts/s-06c862-writing-tests-notes.md), and the test habits in `[s-484bd5]`'s [sizing notes](../drafts/s-484bd5-sizing-and-design-gating-notes.md).
 **Carry back:**
 - one-big-map, on branch `kit-sync/06c862` — pending
 - this repo's own copies — pending
