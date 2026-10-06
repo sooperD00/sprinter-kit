@@ -21,10 +21,42 @@ Decided in planning, 2026-10-06.
 
 - D1. A repo that already has `docs/ESSAY.md` or `docs/field-guide.md` keeps it. init leaves the file alone, lists it, and writes everything else. A dangling symlink at either path still stops init, as any blocked path does.
 - D2. The handbook doesn't change. Neither file is a planning file, and reviewers reach the field guide through pointers in the code. So this repo's own copies have nothing to carry back.
-- D3. The field guide's entry rules live in a comment in its template, and the comment says to keep it. People read the field guide for its terms; agents read the raw file. The comment becomes the one home for the rules prompt6 and prompt7 restate today.
+- D3. The field guide's entry rules live in a comment in its template, and the comment says to keep it. People read the field guide for its terms; agents read the raw file. prompt6 and prompt7 restate these rules today, until `[s-b34c63]` points them at the comment. The rules:
+  - The test: could a strong engineer with no background in this domain tell whether a line of code is right? If not, and what's missing is domain knowledge rather than code knowledge, it's an entry.
+  - Look for numbers and limits with a domain reason; orders and conventions that come from a standard or a data source (axis order, units, ID formats); deliberate omissions that look like bugs; domain names and acronyms in identifiers, docstrings and comments; standards cited with no explanation.
+  - Skip language and library mechanics, which are code knowledge. Why the project chose one thing over another belongs in design.md or a decision record.
+  - Group entries under an area named with the standard or source it follows: `## Dates (ISO 8601)`. Under the heading, "Used by:" names the modules that rely on it. Lead each entry with a bold claim, then explain it.
+  - Point code at the area once per module, from the highest docstring that covers it: `(See docs/field-guide.md#dates-iso-8601.)` GitHub builds the anchor from the heading: lower case, punctuation dropped, spaces as hyphens.
 - D4. The essay's "what goes in it" line lives in its HOW TO comment, which is deleted once the essay is written. A line about the file reads oddly at the top of a public essay. The field guide keeps its line visible, as one-big-map's does.
 - D5. No opt-out flag. A project that doesn't want either file deletes it before committing. init never commits, so that costs nothing.
 - D6. An implementation-plan template is out of scope: `[h-8976df]`.
+
+**Template outlines**, approved with the decisions. Placeholders are in angle brackets.
+
+```
+templates/docs/ESSAY.md
+
+# <The claim, in a few words>
+<!-- HOW TO USE THIS FILE: the argument this project makes (what people assume about the
+problem, what is true instead, and how the design follows). It is the page you link when you
+share the project. How it differs from README (what the project is, how to run it) and
+design.md (why each choice was made). Delete every comment as you fill it in. -->
+<The common picture of the problem, and where it breaks.>
+## <Something true instead, stated as a claim>
+## Where this comes from
+## What this does not claim
+```
+
+```
+templates/docs/field-guide.md
+
+# Field guide
+Domain terms a reviewer may not know, how they relate, and where they bite.
+<!-- HOW TO ADD AN ENTRY. Keep this comment. The rules in D3. -->
+## <Area> (<the standard or source it follows>)
+Used by: `<module>`
+**<A claim about a term.>** <What it means, and where it bites.>
+```
 
 ## leg a — the templates, and init leaving a project's own copies alone (feature) --- in progress
 
@@ -33,9 +65,9 @@ Decided in planning, 2026-10-06.
 - [ ] In a scratch repo that already has `docs/ESSAY.md`, init writes everything else, leaves the essay unchanged (the same `git hash-object` before and after), lists it as left alone, and exits as it would in a repo without one.
 - [ ] A dangling symlink at `docs/ESSAY.md` still stops init: exit 2, nothing written.
 - [ ] scan, in the repo that has the essay, reports it as here already and the field guide as one init will write.
-- [ ] Each file init writes matches its template byte for byte (`cmp`), and `grep -n '{{' templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing.
-- [ ] `git grep -niE 'one-big-map|parcel|apn|crs84|faab97' -- templates/` finds nothing.
-- [ ] The essay's HOW TO comment says what goes in the file, how it differs from README and design.md, and to delete the comment. The field guide's first line says what goes in it, and its entry-rules comment says to keep it.
+- [ ] The two files init writes match their templates byte for byte (`cmp`), and `grep -n '{{' templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing.
+- [ ] `git grep --untracked -niE 'one-big-map|parcel|apn|crs84|faab97' -- templates/docs/ESSAY.md templates/docs/field-guide.md` finds nothing. (`templates/docs/decisions/ADR-NNN-review-files.md` still names faab97. `[s-a0f5d1]` leg b clears it.)
+- [ ] The essay's HOW TO comment says what goes in the file, how it differs from README and design.md, and to delete the comment. The field guide's line under its title says what goes in it, and its entry-rules comment holds the rules in D3 and says to keep it.
 - [ ] Each of these names both files: README ("What's in it", or the paragraph after it), interface-spec (Files, Kit blanks, and the list of what stops init), design.md (the exception to "anything in the way stops it", and why these two files ship) and SKILL.md (step 3: init writes both, and they are the person's to write).
 - [ ] `python3 -c "import ast; ast.parse(open('scripts/sprinter.py').read(), feature_version=(3, 8))"` passes.
 
