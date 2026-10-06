@@ -104,14 +104,14 @@ Used by: `<module>`
 ## leg b — carry back to one-big-map (migration) --- planned
 
 **Done when**
-- [ ] one-big-map's `kit-sync/b57080` branch changes exactly two files (`git diff --stat main...kit-sync/b57080`): the entry-rules comment sits under `docs/field-guide.md`'s first line, and `[h-f44ef7]` is gone from `docs/sprints/housekeeping.md`.
+- [ ] one-big-map's `kit-sync/b57080` branch changes exactly two files (`git diff --stat main...kit-sync/b57080`): the entry-rules comment sits under the line that says what `docs/field-guide.md` holds, and `[h-f44ef7]` is gone from `docs/sprints/housekeeping.md`.
 - [ ] Its pull request names the kit commit it carries back.
 - [ ] Once that pull request merges, this file's Carry back line reads `merged YYYY-MM-DD <sha>`.
 
 **Commits**
 | # | | |
 |---|---|---|
-| 1 | `docs(field-guide): the kit's rules for adding an entry` | the comment, copied from the kit's template, under the field guide's own first line |
+| 1 | `docs(field-guide): the kit's rules for adding an entry` | the comment, copied from the kit's template, under the line that says what the field guide holds |
 | 2 | `docs(sprints): clear h-f44ef7, carried back from sprinter-kit` | the housekeeping line |
 
 **Watch** one-big-map has other agents working in it. The carry back is a branch and a pull request, never a push to main. Branch from main as it is that day.
