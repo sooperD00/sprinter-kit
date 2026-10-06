@@ -2,13 +2,14 @@
 """Put a repo under the sprinter-kit planning system, and hand out IDs for it.
 
   python3 <kit>/scripts/sprinter.py scan                 what is here to set up or migrate
-  python3 <kit>/scripts/sprinter.py init --greenfield    write the planning files into the repo
+  python3 <kit>/scripts/sprinter.py init --greenfield    write planning files, essay and field guide
   python3 <kit>/scripts/sprinter.py init --brownfield    the same, keeping the migration blanks
   python3 <kit>/scripts/sprinter.py id [--count N]       fresh IDs, checked against the repo
 
 Run it from anywhere inside the repo you are setting up, or pass --repo. It finds its templates
 next to itself, so the kit can live anywhere on disk. scan and id write nothing. init only adds
-files: if one it would write already exists, it writes none of them. Nothing is staged or
+files: if one it would write already exists, it writes none of them. The exception is a repo's
+own docs/ESSAY.md or docs/field-guide.md, which init leaves alone. Nothing is staged or
 committed. Windows Git Bash runs it as `python`, not `python3`.
 
 Exit status: 0 clean, 1 findings (suspects from scan, or blanks init left for you to fill),
@@ -151,6 +152,9 @@ def rel_path(root, arg, flag):
 
 
 JUNK = re.compile(r"^(\..*|Thumbs\.db|desktop\.ini|.*~|.*\.sw[op]|.*\.py[co])$", re.I)
+# Docs that are the project's to write. init writes the kit's template where one is missing and
+# leaves the project's own copy alone.
+PROJECT_DOCS = ("docs/ESSAY.md", "docs/field-guide.md")
 
 
 def template_files():
@@ -190,6 +194,13 @@ def blocked(root, out):
     except ValueError:
         return f"{out} would land outside the repo, through a symlinked folder"
     return None
+
+
+def own_copy(root, rel):
+    """Whether `rel` is one of PROJECT_DOCS and the repo has its own copy, which init leaves alone.
+    A dangling symlink or a folder at the path is no copy: it stays in the way, and blocked() says
+    so."""
+    return rel in PROJECT_DOCS and os.path.isfile(root / rel)
 
 
 # ---------------------------------------------------------------- suspects
@@ -321,6 +332,16 @@ def cmd_scan(a):
     plans = [f for f in files if f.lower().endswith(DOC_SUFFIXES) and not f.startswith(ours)
              and f not in records and PLANNING_NAME.search(PurePosixPath(f).name)]
     print(f"planning docs  {', '.join(plans) if plans else 'none found by name'}")
+
+    docs = [rel for _, rel in template_files() if rel in PROJECT_DOCS]
+    for n, rel in enumerate(docs):
+        if own_copy(root, rel):
+            said = f"{rel} here already, so init leaves it alone."
+        elif (why := blocked(root, rel)):
+            said = f"{why}, so init will refuse to write."
+        else:
+            said = f"{rel} not found, so init writes it."
+        print(f"{'project docs' if n == 0 else '':<15}{said}")
 
     agents = [f for f in AGENT_FILES if f in have] + sorted({f.split("/")[0] + "/" for f in files if f.startswith(".claude/")})
     if agents:
@@ -469,7 +490,7 @@ def cmd_init(a):
         raise CantCheck(f"ADR number {digits} is taken by {decisions}/{taken[0]}")
     adr_rel = (decisions / name).as_posix()
 
-    writes, left = [], []
+    writes, left, kept = [], [], []
     for t, rel in template_files():
         if rel.startswith("docs/decisions/"):
             leaf = rel[len("docs/decisions/"):]
@@ -479,6 +500,8 @@ def cmd_init(a):
                 writes.append((t, (decisions / leaf).as_posix()))
             else:
                 left.append((decisions / leaf).as_posix())
+        elif own_copy(root, rel):
+            kept.append(rel)
         else:
             writes.append((t, rel))
     in_the_way = [why for _, out in writes if (why := blocked(root, out))]
@@ -544,6 +567,11 @@ def cmd_init(a):
         print("\nFilled with defaults. If one is wrong, fix it where it landed:")
         for flag, value, what in defaults:
             print(f"  {flag:<16} {value}  ({what})")
+    if kept:
+        print("\nLeft alone, because the repo has its own")
+        print("(the kit's copies are in its templates/ folder, if you want them):")
+        for p in kept:
+            print(f"  {p}")
     if left:
         print(f"\nNot written, because {decisions}/ already has records or an index of its own")
         print("(the kit's copies are in its templates/ folder, if you want them):")
@@ -616,7 +644,7 @@ def main():
     s.add_argument("--repo", metavar="PATH", help=repo_help)
     s.add_argument("--all", action="store_true", help="list every suspect line, not the first few")
 
-    i = sub.add_parser("init", help="write the planning files into the repo")
+    i = sub.add_parser("init", help="write planning files, essay and field guide")
     mode = i.add_mutually_exclusive_group(required=True)
     mode.add_argument("--greenfield", action="store_true", help="nothing to migrate")
     mode.add_argument("--brownfield", action="store_true",
