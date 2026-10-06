@@ -1,7 +1,7 @@
 # Essay and field guide templates
 
 **ID**: `[s-b57080]`
-**Status**: planned
+**Status**: in progress
 
 Ships `docs/ESSAY.md` and `docs/field-guide.md` as templates that init writes into any project that doesn't have them, and carries the field guide's entry rules back to one-big-map.
 
@@ -26,7 +26,7 @@ Decided in planning, 2026-10-06.
 - D5. No opt-out flag. A project that doesn't want either file deletes it before committing. init never commits, so that costs nothing.
 - D6. An implementation-plan template is out of scope: `[h-8976df]`.
 
-## leg a — the templates, and init leaving a project's own copies alone (feature) --- planned
+## leg a — the templates, and init leaving a project's own copies alone (feature) --- in progress
 
 **Done when**
 - [ ] Before commit 1, the files `init --greenfield --no-phases --model test` writes into a fresh scratch repo are on record (commit 0). After the leg, the same command writes that list plus `docs/ESSAY.md` and `docs/field-guide.md`, and nothing else in the list changes.
