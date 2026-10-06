@@ -53,6 +53,8 @@ added to the file later.
 | close tag | `sprint-<NNN>-<id>` |
 | the handbook | `<decisions>/adr-<NNN>-planning-system.md` |
 | ADR template | `<decisions>/adr-000-adr-template.md` |
+| essay | `docs/ESSAY.md` |
+| field guide | `docs/field-guide.md` |
 
 Not sprints and not lists, so checkers skip them: `docs/sprints/sprint-template.md`,
 `docs/reading/reading-list-template.txt`, and dotfiles (`.gitkeep` holds `remaining/` and
@@ -169,6 +171,7 @@ second.
 | kit blank | `{{name}}` | the kit's: filled by init, or listed with a line number for you to fill |
 | option | `<!-- kit:<option> -->` … `<!-- /kit:<option> -->` around lines, or at the end of one line | the kit's: kept when the option is on, dropped when off, left in place when undecided |
 | per-use blank | HTML comments and placeholder prose in `sprint-template.md`; `<angle brackets>` in `reading-list-template.txt` | the project's, filled each time a sprint or a list starts |
+| project doc | the HOW TO comment and placeholder prose in `docs/ESSAY.md`; placeholder prose in `docs/field-guide.md` | the person's to write. init never reports them. The field guide's entry-rules comment stays |
 
 Options: `greenfield`, `brownfield` (always decided, by the mode), and `phases` (on with
 `--phase-doc`, off with `--no-phases`, otherwise undecided).
@@ -209,7 +212,9 @@ init copies every file under `templates/` except the junk an OS or editor leaves
 init stops before writing anything when:
 
 - the decisions folder already holds a `*-planning-system.md` (a repo takes the handbook once)
-- a file it would write exists already, a dangling symlink included
+- a file it would write exists already, a dangling symlink included. The exception is a repo's
+  own `docs/ESSAY.md` or `docs/field-guide.md`: init leaves it alone and lists it. A dangling
+  symlink at either path still stops init
 - a folder on the way is a file, or a symlinked folder would carry a write outside the repo
 - the ADR number is taken, or the repo names its records some other way and `--adr-file` is
   missing
