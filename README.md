@@ -1,8 +1,16 @@
 # sprinter-kit
 
-A sprint planning system for building software with AI agents. Sprints are named by hex IDs that
+A sprint planning system for building software with AI agents. 
+With documented processes that turn judgement into a shared proceedure.
+
+Sprints are named by hex IDs that
 never move, each sprint is one file, each leg fits one sitting, and every coding session gets a
 reading list.
+
+Humans and agents read the same specs for how code, tests, reviews and docs are done, so quality comes from the process, not from the model of the month. In DoE vocabulary, this robust design:
+- The model is a noise factor. You don't control its version, its sampling, or what changes next month.
+- The spec, sizing rules, review format and checks are control factors. You own them, so that's where the effort goes.
+- The result is output that stays good across model changes, instead of output you hope for.
 
 On 2026-09-19, inserting one sprint into application-pipeline's plan cost 117 edits across four
 documents. The sprints were numbered by their order, so everything behind the new one had to be
