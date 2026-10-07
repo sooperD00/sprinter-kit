@@ -84,6 +84,24 @@ That is the time to package the kit.
   sprint or a list starts. init reports only the first kind.
 - init adds files and never edits one. Anything in the way stops it before it writes. A file
   whose format drifted is a thing to read, not to repair silently.
+- The exception is a project's own `docs/ESSAY.md` or `docs/field-guide.md`. init leaves it
+  alone, lists it, and writes the rest. Those files are the project's writing, not the kit's
+  format, so one that exists is kept rather than read as drift. A dangling symlink at either
+  path is still in the way.
+
+## The essay and the field guide
+
+- init writes `docs/ESSAY.md` and `docs/field-guide.md` so every project starts with a page for
+  its argument and a page for its domain terms. Both are the project's to write, so each
+  template ships a purpose, rules and a skeleton, and no kit blanks.
+- The essay is the argument the project makes, and the page you link when you share it. Its
+  purpose sits in the HOW TO comment, which goes once the essay is written. A line about the
+  file reads oddly at the top of a public essay.
+- The field guide is one document with two readers. People read it for its terms, so its
+  purpose line stays visible. Agents read the raw file, so the rules for adding an entry sit in
+  a comment that stays.
+- Both templates are thin. The field guide rests on one example, and the essay on two with
+  different shapes. A template drawn from one example's domain encodes that domain.
 
 ## IDs
 

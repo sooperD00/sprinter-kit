@@ -30,7 +30,10 @@ design.md             why the kit is shaped this way
 ```
 
 The handbook is `templates/docs/decisions/adr-NNN-planning-system.md`. init copies it into your
-repo as your own ADR, and your repo edits its copy from then on.
+repo as your own ADR, and your repo edits its copy from then on. init also writes
+`docs/ESSAY.md` and `docs/field-guide.md` where your repo has none, and leaves your own alone.
+Both are yours to write: the essay is the argument your project makes, and the field guide holds
+the domain terms a reviewer may not know.
 
 ## Use it
 
