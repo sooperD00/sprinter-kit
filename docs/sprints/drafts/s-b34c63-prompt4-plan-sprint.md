@@ -70,6 +70,8 @@ A sprint is planned in full when:
 - a Commits table orders commits where the order matters, and says why
 - it specifies constraints (interfaces, ordering, what must not move) and leaves the code to
   the coder
+- every decision's substance is in the sprint file. A coder can't follow what it can't open,
+  and our chat is something it can't open.
 
 
 # ─────── Tasks ──────────────────────────────────

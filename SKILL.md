@@ -64,8 +64,12 @@ python3 <kit>/scripts/sprinter.py init --brownfield --phase-doc docs/roadmap.md 
 ```
 
 init adds files and edits none. If anything it would write is in the way, it stops and writes
-nothing. It prints what it wrote, the defaults it used, what it left alone, and every blank still
-open, with a line number.
+nothing. The exception is the repo's own `docs/ESSAY.md` or `docs/field-guide.md`, which init
+leaves alone. It prints what it wrote, the defaults it used, what it left alone, and every blank
+still open, with a line number.
+
+init writes `docs/ESSAY.md` and `docs/field-guide.md` where the repo has none. They are the
+person's to write. Leave them as init wrote them.
 
 ## 4. Fill the blanks
 
