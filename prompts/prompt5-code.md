@@ -136,16 +136,16 @@ REVIEW TURNS:
 [In the future: follow the review process in ADR-NNN, but for now,]
 I've set up a folder to track reviews for later reflection in docs/sprints/reviews/.
 Review agents write files like `r-<id>-<leg>-<short-description>.md` with checklist
-items to either answer to execute. Check git to see the latest review file and
-address one by one, splitting into turns if that is indicated in the files and
-stopping for me where it says to. Answer with an "answer" file named with matching
-ids and short description `a-<id>-<leg>-short-description.md` (`r-` stands for
-"review" and `a-` stands for "answer").
+items to either answer to execute, where `r-` stands for "review. Check git to see
+the latest review file and complete the items one by one, splitting into turns if
+that is indicated in the files and stopping for me where it says to. Answer in the
+`r-` file and commit your work. Use `[x]` for done, `[c]` for when you "capture" an item in the place it needs to be done or tracked (a sprint, housekeeping, tech debt).
+Mark [!] for items that need help from me and you've had to stop.
 
 I'll let you know if this is a review turn and give you a heads up about the
 review file name if needed.
 
-```
+---
 
 FINAL TURN:
 
