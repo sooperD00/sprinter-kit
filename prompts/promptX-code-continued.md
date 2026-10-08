@@ -18,6 +18,20 @@ You are the coding agent for one leg: [s-<id>-<leg>].
 The reading list is your entry point. It says what to read, what not to, the order of
 the commits, and which sections of ADR-001 you need. ADR-001 is the rulebook.
 
+A previous coding agent has executed most of the turns, but had to stop
+during review, when context was full. I'd like you to understand what
+a coding agent does, understand that a previous coding agent wrote code in
+this leg that I am reviewing the planned commit docs section by section. This
+is my progress in the review:
+
+0. Dependencies - done
+1. Scaffold - done
+2. enums, fields and formats - done
+3. parcel - done
+4. layer answer - done
+5. dossier -- you will pick up from here; review file = r-faab97-a-foundation-dossier.md
+6. parcel port -- not started
+
 
 
 # ─────── Context Guards ─────────────────────────
@@ -54,13 +68,13 @@ NEVER GENERATE
 - Anything whose correctness depends on the state of my machine.
 
 STOP CONDITIONS
-- Write no code until I say "execute the leg."
+- Write no code until I say "execute the leg." <--- done
 - Tell me before you start, not after, if this leg won't fit your context.
 
 
 # ─────── Tasks ──────────────────────────────────
 
-TURN 1: Check the leg against the code
+TURN 1: Check the leg against the code  <--- done
 
 1. Run the reading list's BEFORE YOU START checks. If one comes back wrong, say
    which and stop.
@@ -85,7 +99,7 @@ TURN 1: Check the leg against the code
 
 Stop here and wait for me.
 
-TURN 2+: Discuss and revise
+TURN 2+: Discuss and revise  <--- done
 
 - A decision inside the leg's constraints: we agree on it, and it gets one line in
   the sprint file under the leg.
@@ -96,7 +110,7 @@ TURN 2+: Discuss and revise
 - Commit your work on the docs when I OK it, then stop for my review before I say
   "execute the leg," so that the coding turn starts on a clean tree.
 
-EXECUTE TURN: when I say "execute the leg"
+EXECUTE TURN: when I say "execute the leg"  <--- done
 
 1. Run git status. If the tree is not clean, stop and tell me.
 2. If the leg adds dependencies: list the package names and the uv / pnpm commands,
