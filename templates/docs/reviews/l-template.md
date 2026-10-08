@@ -51,3 +51,11 @@ Sources:
 ### <file>: for me
 - [ ] <action>: `<path>` or spec _ <section>
   - expect: <what I will see, and what it shows>
+
+## Exercises (<= 3 items the human can do by hand to learn)
+
+> These are learning items for the human. They do not gate agent work and are optional.
+
+     ### <file>: for me
+     - [ ] <action>: `<path>` or spec → <section>
+       - expect: <what I see if it's fine>

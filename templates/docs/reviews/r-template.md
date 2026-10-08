@@ -15,13 +15,11 @@ RNU = Read and Understand
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
    <!-- I will answer these, usually with help from the planning agent. -->
 
-## Exercises (<= 3 items the human can do by hand to learn)
+## Decisions
 
-> These are learning items for the human. They do not gate agent work and are optional.
-
-     ### <file>: for me
-     - [ ] <action>: `<path>` or spec → <section>
-       - expect: <what I see if it's fine>
+  <!-- this is where I'll put my answers later. -->
+  <!-- mark any items here [c] captured when they are captured in the 
+       Agent Checklist below -->
 
 ## Agent Checklist
 
@@ -43,3 +41,5 @@ Item rules:
 - An item a tracker already holds gets one line: `already tracked: <ID>`.
 - When an item needs text in a planning doc, write it ready to paste in that doc's
   format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
+- After you copy a paste block into its landed location, mark its boxes [c] captured
+  here in the r- file.

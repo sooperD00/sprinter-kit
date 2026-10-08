@@ -152,7 +152,8 @@ the latest review file and complete the items one by one, splitting into turns i
 that is indicated in the files and stopping for me where it says to. Answer in the
 `r-` file and commit your work. Use `[x]` for done, `[c]` for when you "capture" an
 item in the place it needs to be done or tracked (a sprint, housekeeping, tech debt).
-Mark [!] for items that need help from me and you've had to stop.
+Mark [!] for items that need help from me and you've had to stop. After you copy a
+paste block into its landed location, mark its boxes [c] captured in the `r-`` file
 
 I'll let you know if this is a review turn and give you a heads up about the
 review file name if needed.
