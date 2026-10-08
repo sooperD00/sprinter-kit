@@ -11,7 +11,6 @@ RNU = Read and Understand
 `[!]` = there's an issue, had to stop. Help needed. (usually spawns a separate or
     nested item tree).
 
-
 ## Decide
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
    <!-- I will answer these, usually with help from the planning agent. -->
