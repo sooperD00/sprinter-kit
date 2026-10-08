@@ -159,8 +159,7 @@ I'll let you know if this is a review turn and give you a heads up about the
 review file name if needed.
 
 When I'm ready to close the review of a commit block, I rerun the gates, then ask you to write
-a seal commit following ~/repos/sprinter-kit/templates/docs/reviews/seal-commit-template.md
-and ~/repos/sprinter-kit/docs/sprints/drafts/s-589bbb-adr-NNN-git-hierarchy-markers.md.
+a seal commit following ~/repos/sprinter-kit/templates/docs/reviews/seal-commit-template.md.
 
 FINAL TURN:
 
