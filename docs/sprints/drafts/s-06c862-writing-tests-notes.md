@@ -20,7 +20,7 @@ Every class and function in parcel.py
 Lines of parcel.py that no test ran (the tool you guessed exists)
 - [ ] uv add --dev pytest-cov, then uv run pytest tests/contract --cov=onebigmap.contract.parcel --cov-report=term-missing
 
-The anchor term for the last row is code coverage. It tells you whether a line ran, not whether anything checked it, so pass 2 stays your job. (Pass 2 has a tool too, mutation testing: it breaks the code on purpose and checks that a test fails. It isn't worth it at this size.)
+The anchor term for the last row is code coverage. It tells you whether a line ran, not whether anything checked it, so pass 2 stays your job. (Pass 2 has a tool too, mutation testing: it breaks the code on purpose and checks that a test fails. ~~It isn't worth it at this size.~~ <- ha. one-big-map r/l-faab97-a-foundation-dossier: "Here 44 hand-planted changes, each rerunning a suite that takes a quarter of a second, found six gaps in a file with 100% coverage.")
 
 Claude outputted a very nice table with checkmarks of like, thing to check and
 are you checking this thing -- should formalize that too.
