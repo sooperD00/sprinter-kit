@@ -2,12 +2,6 @@
 
 Draft for `[s-06c862]`. From DEVLOG, 2026-10-05, during one-big-map's faab97 leg-a review. Kept as written.
 
-```text
-10/5/26 12:13a
-adr-for-writing-tests-20261005.txt
-one-big-map-20261001: sprint-faab97-foundation.md -- leg a -- review 2
-one-big-map-20261001: cc sprint-faab97-foundation.md -- leg a -- CODE
-
 The names: pass 1 is traceability (every spec rule maps to a test), and pass 2 is test validity (does each test check what its name says?). Splitting them is the right call.
 
 You want	Command
@@ -15,13 +9,16 @@ You want	Command
 # Pass 1: Traceability (every spec rule maps to a test):
 
 Every test name, with each parametrized case listed separately
-	- [ ] uv run pytest tests/contract/test_parcel.py --collect-only -q
+- [ ] uv run pytest tests/contract/test_parcel.py --collect-only -q
+
 Just the function names
-	- [ ] grep -n '^def test_' tests/contract/test_parcel.py
+- [ ] grep -n '^def test_' tests/contract/test_parcel.py
+
 Every class and function in parcel.py
-	- [ ] grep -nE '^(class|def) ' src/onebigmap/contract/parcel.py
+- [ ] grep -nE '^(class|def) ' src/onebigmap/contract/parcel.py
+
 Lines of parcel.py that no test ran (the tool you guessed exists)
-	- [ ] uv add --dev pytest-cov, then uv run pytest tests/contract --cov=onebigmap.contract.parcel --cov-report=term-missing
+- [ ] uv add --dev pytest-cov, then uv run pytest tests/contract --cov=onebigmap.contract.parcel --cov-report=term-missing
 
 The anchor term for the last row is code coverage. It tells you whether a line ran, not whether anything checked it, so pass 2 stays your job. (Pass 2 has a tool too, mutation testing: it breaks the code on purpose and checks that a test fails. It isn't worth it at this size.)
 
