@@ -12,6 +12,8 @@
 - `e-template.md`: expect notes template (TODO)
 - `l-template.md`: learning notes template (TODO)
 - `leg-template.md`: devlog of a leg (TODO)
+- `seal-commit-template.md`: template for summarizing review of a commit block
+	for the seal commit that will mark the close of it. (TODO)
 
 ## ADR references
 
