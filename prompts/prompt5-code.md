@@ -106,6 +106,10 @@ EXECUTE TURN: when I say "execute the leg"
 4. Write the leg, following ADR-001's "Run a sprint".
    - Run what proves the work: the test suites, the leg's gates, the app if a gate
      needs it. Run nothing that installs, deletes, or writes outside this repo.
+   - Each module you add or reshape gets a docstring following ADR draft
+     `~/repos/sprinter-kit/docs/sprints/drafts/s-b45e6c-adr-NNN-docstrings.md`.
+     Write it last, when the file is finished, and read it against the file once more
+     before handoff.
    - Commit your work following the commit plan
 5. Hand off the leg, following ADR-001's "Hand off a leg". This is the last step of
    this turn, not a separate turn:
