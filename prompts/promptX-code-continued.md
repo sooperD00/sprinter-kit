@@ -29,8 +29,8 @@ is my progress in the review:
 2. enums, fields and formats - done
 3. parcel - done
 4. layer answer - done
-5. dossier -- you will pick up from here; review file = r-faab97-a-foundation-dossier.md
-6. parcel port -- not started
+5. dossier -- done
+6. parcel port -- you will pick up from here; review file = r-faab97-a-foundation-parcel-port.md
 
 
 
