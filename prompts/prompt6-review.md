@@ -222,7 +222,8 @@ Stop and wait for me to resolve decisions. No commit.
 
 6. LAND DOC EDITS
 
-    - Apply every `P#` item, run its expect, and tick it `[x]`.
+    - Apply every `P#` item, run its expect, record its actual, and tick it `[x]`
+      (or `[!]`, per the template's "Expect and actual").
     - The exception: any edit to text a test reads stays in the coding agent's
       checklist, in the same turn as the code that makes it pass. List the sections
       the coding agent must read, by heading, at the top of the Coding Agent's

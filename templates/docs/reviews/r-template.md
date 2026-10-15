@@ -16,6 +16,23 @@ r-<sprint>-<leg>-<short-description>.md
   this is not source code
 
 
+## Expect and actual (both checklists)
+
+Whoever runs an item records what it showed under its expect:
+
+```markdown
+- [x] <command or look>
+    - expect: <what you see if it's fine>
+    - actual [<what it showed>]
+```
+
+- Match: record what it showed, e.g. `actual [2 passed]`, `actual [no output]`.
+- Mismatch that is only drift (a test count moved, a line number shifted): still `[x]`.
+  Record the real value, and the reason if it isn't obvious.
+- Mismatch where the expect itself was wrong: mark the item `[!]`, and under
+  `actual` write the reasoning, or a corrected command with its own expect and actual.
+  If the gap needs work, that becomes a new item, or a question under `## Decisions`.
+
 ## Decide
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
    <!-- I will answer these, usually with help from the planning agent. -->
