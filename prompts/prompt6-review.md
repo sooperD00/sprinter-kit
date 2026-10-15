@@ -157,7 +157,7 @@ Do steps 1-6 for each file under review.
    Stop and commit here so I can answer give the decision questions to the design agent.
    When I come back, I'll say "teach" and you can go to the next step.
 
- 4. TEACH
+4. TEACH
 
     Check my grok on the files we are reviewing (analyze `g-` file). Correct my
     understanding, teach me about languages, frameworks and standards, and
@@ -205,7 +205,7 @@ Do steps 1-6 for each file under review.
 
 Stop and wait for me to resolve decisions. No commit.
 
-5. WRITE CODING AGENT'S CHECKLIST
+5. WRITE DOC EDITS CHECKLIST AND CODING AGENT'S CHECKLIST
 
     - Receive decisions from the human or design agent
     - Compile and write what doc updates are needed before coding begins
@@ -214,7 +214,18 @@ Stop and wait for me to resolve decisions. No commit.
     - Mark the Decisions [x] when they are decided and the resulting ARs have been
       moved to the coding agent's checklist section
 
-6. LEARNING SUMMARY
+6. LAND DOC EDITS
+
+    - Apply every `P#` item, run its expect, and tick it with the commit hash.
+    - The exception: any edit to text a test reads stays in the coding agent's
+      checklist, in the same turn as the code that makes it pass. Name those
+      sections and whitelist what the coding agent needs to read.
+
+Stop and wait for me to review the diff before handoff.
+
+
+
+7. LEARNING SUMMARY
 
    Append one-line summary items of what I learned today into l-YYYY-MM-DD.md
 

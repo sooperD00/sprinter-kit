@@ -12,7 +12,8 @@ r-<sprint>-<leg>-<short-description>.md
     nested item tree).
 - `F` =  a fix to source or tests, described, not written: the gap, the expect, the check.
 - `P` = doc text: ok to provide "code" blocks, because this is not source code
-- `C` = commands: ok to provide "code" or "code" blocks, because this is not source
+- `C` = commands: ok to provide "code" or "code" blocks in these items, because 
+  this is not source code
 
 
 ## Decide
@@ -25,11 +26,18 @@ r-<sprint>-<leg>-<short-description>.md
   <!-- mark any items here [c] captured when they are captured in the 
        Coding Agent's Checklist below -->
 
+## Doc Edits Checklist (Spec Before Code!)
+
+P# items go here: Docs updates, including housekeeping and techdebt to be captured
+(Ref: ADR-001).
+
+Item rules:
+- The Review Agent completes doc edits before handoff to Coding Agent
+
 ## Coding Agent's Checklist
 
-TURN 1: docs updates, including housekeeping and techdebt items (Ref: ADR-001)
-TURN 2: quick fixes
-TURN 3+: more difficult fixes, blocked into reasonable turns for attention
+TURN 1: quick fixes
+TURN 2+: more difficult fixes, blocked into reasonable turns for attention
 
 Status is one of: blocks the demo · check before leg <x> · handled by design; verify ·
 carry forward to <s-id> · tick a follow-up · tech debt · already tracked. Blocking
@@ -52,3 +60,4 @@ Item rules:
 - You may quote existing code (this is for basic communication)
 - You may name a new test function (it makes the suite count checkable)
 - The spec's code block counts as spec (not source code)
+- A P item is the review agent's unless it touches text a test reads
