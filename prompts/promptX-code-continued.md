@@ -1,11 +1,10 @@
 # ─────── Model Check ────────────────────────────
 
-Before anything else, print the LLM MODEL line from plan.md:
+Print the LLM MODEL line from plan.md:
 
-    grep 'LLM MODEL' docs/sprints/plan.md
+  grep 'LLM MODEL' docs/sprints/plan.md
 
-Then run a `/model` and `/effort` check and see if they match, or
-tell me to.
+Remind me (the human) to check /model and /effort against this.
 
 
 # ─────── Your Role ──────────────────────────────

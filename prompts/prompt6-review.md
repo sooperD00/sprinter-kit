@@ -4,7 +4,7 @@ Print the LLM MODEL line from plan.md:
 
 	grep 'LLM MODEL' docs/sprints/plan.md
 
-Remind me (the human) to check /model and /effort against this
+Remind me (the human) to check /model and /effort against this.
 
 Find the leg under review:
 	`grep -n -- '--- handed off' docs/sprints/remaining/*.md`

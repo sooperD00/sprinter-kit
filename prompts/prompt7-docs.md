@@ -1,5 +1,11 @@
-Please verify you are Claude Opus 5. Stop if you are not. Remind me, the human, to
-check that extended thinking is on and at Max.
+# ─────── Model Check ────────────────────────────
+
+Print the LLM MODEL line from plan.md:
+
+  grep 'LLM MODEL' docs/sprints/plan.md
+
+Remind me (the human) to check /model and /effort against this.
+
 
 # ── READ FIRST: CONTEXT GUARDS ─────────────────────────────────────
 This is a docs review session and I'm controlling your context deliberately.
