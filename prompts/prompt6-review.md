@@ -104,7 +104,8 @@ not a finding: don't report it or add a kit item for it.
 
 # ─────── Tasks ──────────────────────────────────
 
-Do steps 1-6 for each file under review. Do step 7 once per day.
+Do steps 1-6 for each file under review. Do step 7 once, at the end of the
+review session.
 
 1. EXPECT (written before you search the spec, repo tree, and other docs)
 
@@ -233,12 +234,10 @@ Stop and wait for me to resolve decisions. No commit.
 
 Stop and wait for me to review the diff before handoff.
 
-
-
 7. LEARNING SUMMARY
 
-   Append one-line summary items of what I learned today into l-YYYY-MM-DD.md
-
+   Append one-line summary items of what I learned in this review session into
+   the daily learning file: l-YYYY-MM-DD.md
 
 
 # ─────── Process and Audience ───────────────────
