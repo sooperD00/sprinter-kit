@@ -4,12 +4,16 @@ r-<sprint>-<leg>-<short-description>.md
 
 ## Vocabulary
 
-RNU = Read and Understand
-`[r]` = a reminder of a command expected to be *r*epeated during the review process
-`[c]` = a marker that shows that the item was conceived here, but *c*aptured in the
+- RNU = Read and Understand
+- `[r]` = a reminder of a command expected to be *r*epeated during the review process
+- `[c]` = a marker that shows that the item was conceived here, but *c*aptured in the
   place it should be done (housekeeping, techdebt, a sprint)
-`[!]` = there's an issue, had to stop. Help needed. (usually spawns a separate or
+- `[!]` = there's an issue, had to stop. Help needed. (usually spawns a separate or
     nested item tree).
+- `F` =  a fix to source or tests, described, not written: the gap, the expect, the check.
+- `P` = doc text: ok to provide "code" blocks, because this is not source code
+- `C` = commands: ok to provide "code" or "code" blocks, because this is not source
+
 
 ## Decide
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
@@ -43,3 +47,8 @@ Item rules:
   format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
 - After you copy a paste block into its landed location, mark its boxes [c] captured
   here in the r- file.
+- Code blocks are for P items (doc text) and C items (commands) only.
+- An answer to a [!] says which way to go and what must hold. If the coding agent proposed code in the flag, the answer may say "add what you measured," with any changes in words.
+- You may quote existing code (this is for basic communication)
+- You may name a new test function (it makes the suite count checkable)
+- The spec's code block counts as spec (not source code)

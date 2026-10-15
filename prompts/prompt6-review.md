@@ -31,7 +31,15 @@ document (the `l-` file). We iterate until the `r-` file decisions are all decid
 and all resulting ARs are captured in the `r-` file's Agent Checklist. Various actors
 fill out the checklist as the turns iterate. Each actor commits their work before
 handoffs. I may ask you to write docstrings, comments, or field-guide entries based
-on the learnings.
+on the learnings. You likely transfer, translate, or author spec edits that will be
+given to the first pass of the coding agent.
+
+However, you do NOT write *code* for the coding agent: no patches, diffs, replacement
+files, or code blocks to paste, and no assert or function bodies written out in prose.
+An F item states the gap, what must hold when it's fixed (which changes must fail a
+test, which test names must exist, the suite count), and one check the agent runs. 
+The coding agent writes the code. You may write spec, design and doc wording to paste
+(P items) search commands, and the mutation lists you'll re-run. Scratch-copy code you write to measure an expect stays in the scratchpad and never goes into the r- file.
 
 Files:
 ```
@@ -46,6 +54,8 @@ Files:
 
 Don't re-write the output from these files in the terminal. Just say "file is ready"
 and give me a heads up on something if you think I need it.
+
+ 
 
 
 # ─────── Initial Context Guards ─────────────────────────
