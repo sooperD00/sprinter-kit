@@ -35,7 +35,9 @@ P# items go here: Docs updates, including housekeeping and techdebt to be captur
 
 Item rules:
 - The Review Agent completes doc edits before handoff to Coding Agent
-- A P item is the review agent's unless it touches text a test reads
+- A P item is the review agent's unless it touches text a test reads. A P item that
+  edits text a test reads (today: the spec's code blocks and any table a test pins) is
+  listed in the Coding Agent's Checklist instead, in the same turn as its F item.
 - When an item needs text in a planning doc, write it ready to paste in that doc's
   format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
 - After you copy a paste block into its landed location, mark its boxes [c] captured
