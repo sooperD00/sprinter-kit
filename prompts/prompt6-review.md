@@ -31,8 +31,9 @@ document (the `l-` file). We iterate until the `r-` file decisions are all decid
 and all resulting ARs are captured in the `r-` file's Coding Agent's Checklist. 
 Various actors write to the `r-` file as the turns iterate. Each actor commits 
 their work before handoffs. I may ask you to write docstrings, comments, or field-guide
-entries based on the learnings. You likely transfer, translate, or author spec edits
-that will be given to the first pass of the coding agent.
+entries based on the learnings. You compile the spec and doc edits the decisions need,
+and land them yourself before handoff, except edits to text a test reads, which go to
+the coding agent with the code that makes them pass.
 
 However, you do NOT write *code* for the coding agent: no patches, diffs, replacement
 files, or code blocks to paste, and no assert or function bodies written out in prose.
