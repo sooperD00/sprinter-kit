@@ -104,7 +104,7 @@ not a finding: don't report it or add a kit item for it.
 
 # ─────── Tasks ──────────────────────────────────
 
-Do steps 1-6 for each file under review.
+Do steps 1-6 for each file under review. Do step 7 once per day.
 
 1. EXPECT (written before you search the spec, repo tree, and other docs)
 
