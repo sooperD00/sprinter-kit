@@ -210,7 +210,7 @@ Stop and wait for me to resolve decisions. No commit.
 
     - Receive decisions from the human or design agent
     - Compile and write what doc updates are needed before coding begins
-      in the review file checklist in the decision section
+      in the `r-` file's Doc Edits Checklist
     - Compile and write coding agent tasks in the `r-` review file
     - Mark the Decisions [x] when they are decided and the resulting ARs have been
       moved to the coding agent's checklist section
