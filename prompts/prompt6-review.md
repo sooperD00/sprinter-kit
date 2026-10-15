@@ -224,8 +224,9 @@ Stop and wait for me to resolve decisions. No commit.
 
     - Apply every `P#` item, run its expect, and tick it `[x]`.
     - The exception: any edit to text a test reads stays in the coding agent's
-      checklist, in the same turn as the code that makes it pass. Name those
-      sections and whitelist what the coding agent needs to read.
+      checklist, in the same turn as the code that makes it pass. List the sections
+      the coding agent must read, by heading, at the top of the Coding Agent's
+      Checklist, tagged **NEW WHITELIST**.
 
 Stop and wait for me to review the diff before handoff.
 

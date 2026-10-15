@@ -46,6 +46,8 @@ Item rules:
 
 ## Coding Agent's Checklist
 
+**NEW WHITELIST**: <spec § heading>, <file>. (sections this checklist needs read)
+
 TURN 1: quick fixes
 TURN 2+: more difficult fixes, blocked into reasonable turns for attention
 
