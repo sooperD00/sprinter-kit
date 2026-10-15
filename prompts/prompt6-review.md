@@ -60,12 +60,18 @@ and give me a heads up on something if you think I need it.
 
 This is a review session, and I'm controlling your context deliberately.
 
-Memory:
+Some rules below name tools or files that only some interfaces have. If one
+doesn't exist in this session, skip that rule. Its absence is expected and is
+not a finding: don't report it or add a kit item for it.
+
+## Memory and past chats (claude.ai):
 1.  Until steps say otherwise, Do NOT memory_read anything except:
       /topics/dev-environment.md   — my machines, SSH/tmux/SMB, shell
 2.  Until steps say otherwise, Do NOT use conversation_search or recent_chats.
 3.  Use memory file names as an index. If one looks useful, ASK before opening it.
-4.  Add no memory edits unless I OK one that fixes a doc conflict.
+
+## Every Session:
+4.  Add NO memory edits unless I OK one that fixes a doc conflict.
 5.  Until steps say otherwise, Do NOT read prior conversations about this project.
     The docs must stand alone initially.
 6.  Do NOT write personal information into a repo file. Memory can shape a finding,
