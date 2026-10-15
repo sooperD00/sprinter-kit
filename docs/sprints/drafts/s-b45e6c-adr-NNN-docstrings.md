@@ -23,12 +23,18 @@ A module docstring orients a reader who has not opened the file.
 - Line 1 names what the file is, and the spec section it carries.
 - Then say what the file builds, in the order a reader meets it. Use a short numbered list when there are three parts or more.
 - Say why a part exists when its name doesn't say it.
-- Add one comparison to something the reader already knows, when one fits: SQL, a spreadsheet, a fab. Use only one.
+- Add one comparison paragraph, when one fits, to something the reader already knows: SQL, a spreadsheet, a fab. Two comparisons can share that paragraph when each lands; more than one paragraph is a tutorial.
 - Say what the file does, never what the language does. No tutorial on decorators.
 - Use the present tense. No sprint or leg names, and no history of how the file got this way.
+- Copy a table or sentence from the spec only when a test compares the two. Otherwise name the spec section.
+- Fit on one screen, about 30 lines. Past that, the reader skips, and the rules belong in the spec.
 - End with a pointer to the field guide section, if there is one.
 
 A class or function docstring says what the thing holds or returns, and the one fact a caller would get wrong.
+
+An interface file (a protocol, a port, an abstract base) has two readers: the code that calls it and the person who implements it. Its class docstring also says how to conform, and the one way to get that wrong.
+
+Rules go in a module, class or function docstring. A string under an attribute is a gloss for the editor's hover; `help()` never shows it, so it never carries a rule.
 ```
 
 Draft: Coding Prompt:
