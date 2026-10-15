@@ -127,8 +127,8 @@ Do steps 1-6 for each file under review.
    source or test file to answer one of your gap questions from expectations is usually
    a good Learn item. Part of the review is finding what a file implies but the repo
    doesn't hold, so a gap is a finding. Record which of your expectations are actually
-   addressed in the `e-` expectations file by marking them [with what? should this be
-   a table? I think so...]
+   addressed in the `e-` expectations file by marking them according to the template
+   instructions
 
    Finally, now that you have done your work with the docs in the repo, now you may use
    memory_read, conversation_search, or recent_chats if anything looks relevant. If you
