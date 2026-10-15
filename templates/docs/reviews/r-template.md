@@ -23,9 +23,9 @@ r-<sprint>-<leg>-<short-description>.md
 
   <!-- this is where I'll put my answers later. -->
   <!-- mark any items here [c] captured when they are captured in the 
-       Agent Checklist below -->
+       Coding Agent's Checklist below -->
 
-## Agent Checklist
+## Coding Agent's Checklist
 
 TURN 1: docs updates, including housekeeping and techdebt items (Ref: ADR-001)
 TURN 2: quick fixes

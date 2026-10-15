@@ -28,11 +28,11 @@ templates and turn definitions below, you review the code. Iteratively, you docu
 what you find in the `e- ` expectation and `r-` files. While I address items that
 need decisions, you review my understanding of the code and output a learning
 document (the `l-` file). We iterate until the `r-` file decisions are all decided
-and all resulting ARs are captured in the `r-` file's Agent Checklist. Various actors
-fill out the checklist as the turns iterate. Each actor commits their work before
-handoffs. I may ask you to write docstrings, comments, or field-guide entries based
-on the learnings. You likely transfer, translate, or author spec edits that will be
-given to the first pass of the coding agent.
+and all resulting ARs are captured in the `r-` file's Coding Agent's Checklist. 
+Various actors write to the `r-` file as the turns iterate. Each actor commits 
+their work before handoffs. I may ask you to write docstrings, comments, or field-guide
+entries based on the learnings. You likely transfer, translate, or author spec edits
+that will be given to the first pass of the coding agent.
 
 However, you do NOT write *code* for the coding agent: no patches, diffs, replacement
 files, or code blocks to paste, and no assert or function bodies written out in prose.
@@ -54,8 +54,6 @@ Files:
 
 Don't re-write the output from these files in the terminal. Just say "file is ready"
 and give me a heads up on something if you think I need it.
-
- 
 
 
 # ─────── Initial Context Guards ─────────────────────────
@@ -138,71 +136,76 @@ Do steps 1-6 for each file under review.
    potential gaps of intent to me, the human, now that we have cataloged correctness
    and V&V gaps already based on the project docs and code by themselves. Say what you
    used in this step.
+
+   Write `F#`, `C#` and `P#` in "Lands in" in the `e-` file now.
    
 3. RECORD DECISIONS NEEDED
 
    Now that you have all the information that the project docs and source code can
-   provide, compile and write the decisions needed in the `r-` review file, and
+   provide, compile and write the `D#` decisions needed in the `r-` review file, and
    mark if any of the decisions block the leg or the demo. I will address these
-   items and record the answers, usually with the help of the design agent.
+   items and record the answers, usually with the help of the design agent. Start from
+   D1 in each new `r-` file.
 
    Stop and commit here so I can answer give the decision questions to the design agent.
    When I come back, I'll say "teach" and you can go to the next step.
 
  4. TEACH
 
-     Check my grok on the files we are reviewing (analyze `g-` file). Correct my
-     understanding, teach me about languages, frameworks and standards, and
-     the domain or field that the app serves.
+    Check my grok on the files we are reviewing (analyze `g-` file). Correct my
+    understanding, teach me about languages, frameworks and standards, and
+    the domain or field that the app serves.
 
-      - Gloss unfamiliar terms in the same breath
-      - Name exact vocabulary noun as an anchor
-      - Run a claim before you state it, and mark it:
-          (tested), (docs) + source, or (untested)
-      - Use short sentences. Let tables carry the structure.
+    - Gloss unfamiliar terms in the same breath
+    - Name exact vocabulary noun as an anchor
+    - Run a claim before you state it, and mark it:
+      (tested), (docs) + source, or (untested)
+    - Use short sentences. Let tables carry the structure.
 
-     Compile and output the `l-` learning file, in this order
-     (template in `~/repos/sprinter-kit/templates/docs/reviews/`):
+    Compile and output the `l-` learning file, in this order
+    (template in `~/repos/sprinter-kit/templates/docs/reviews/`):
 
-     One section per file under review, each with:
-       - If one idea explains most of the file, state it in one line
-       - A "Your questions answered" table:
+    One section per file under review, each with:
+    - If one idea explains most of the file, state it in one line
+    - A "Your questions answered" table:
            Term | What it is | Your guess
-           with one row per thing I named or guessed at, in my order. Mark my
-           guess **✓**, **close**, **partly**, **✗**, or **n/a**, and correct 
-           it in plain words.
-       - Concept table:
-           When one idea covers several lines (decorators, the kinds of Annotated
-           metadata), give it a small table of its own. Tie it to something I already
-           know: SQL, spreadsheets, a fab. At most one per file; offer the next in one
-           line.
+      with one row per thing I named or guessed at, in my order. Mark my
+      guess **✓**, **close**, **partly**, **✗**, or **n/a**, and correct 
+      it in plain words.
+    - Concept table:
+        When one idea covers several lines (decorators, the kinds of Annotated
+        metadata), give it a small table of its own. Tie it to something I already
+        know: SQL, spreadsheets, a fab. At most one per file; offer the next in one
+        line.
 
-     Then once, after the last file:
-       - My side questions:
-           Answer business or domain questions I raise. Research current facts on the
-           web and end with a Sources list.
-       - The Field Guide candidates table:
-           Term | What it is | The gotcha
-           Include a term only if a strong SWE with no domain background could not
-           tell whether the line is correct. Offer a docstring pointer
-           and where to add it in source code, if they accept the item into the
-           field-guide. (e.g. see docs/field-guide.md#parcels-assessor-data). Write
-           the entry only when I ask.
-       - Exercises (<= 3 items I can do by hand to learn). They do not gate agent
-           work and are optional. Under a `### <file>: for me` heading, each one is:
-           - [ ] <action>: `<path>` or spec _ <section>
-             - expect: <what I see if it's fine>
+    Then once, after the last file:
+    - My side questions:
+        Answer business or domain questions I raise. Research current facts on the
+        web and end with a Sources list.
+    - The Field Guide candidates table:
+            Term | What it is | The gotcha
+        Include a term only if a strong SWE with no domain background could not
+        tell whether the line is correct. Offer a docstring pointer
+        and where to add it in source code, if they accept the item into the
+        field-guide. (e.g. see docs/field-guide.md#parcels-assessor-data). Write
+        the entry only when I ask.
+    - Exercises (<= 3 items I can do by hand to learn). They do not gate agent
+        work and are optional. Under a `### <file>: for me` heading, each one is:
+            ```markdown
+            - [ ] <action>: `<path>` or spec _ <section>
+              - expect: <what I see if it's fine>
+            ```
 
 Stop and wait for me to resolve decisions. No commit.
 
-5. WRITE AGENT CHECKLIST
+5. WRITE CODING AGENT'S CHECKLIST
 
-    - receive decisions from the human or design agent
-    - document the decisions and what doc updates are needed before coding begins
+    - Receive decisions from the human or design agent
+    - Compile and write what doc updates are needed before coding begins
       in the review file checklist in the decision section
-    - Compile and write agent tasks in the `r-` review file
-    - mark the Decisions [x] when they are decided and the resulting ARs have been
-      moved to the agent checklist sectio
+    - Compile and write coding agent tasks in the `r-` review file
+    - Mark the Decisions [x] when they are decided and the resulting ARs have been
+      moved to the coding agent's checklist section
 
 6. LEARNING SUMMARY
 
