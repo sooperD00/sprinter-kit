@@ -31,7 +31,7 @@ Every layout below can hold ports and adapters. Choosing `feature` does not mean
 |---|---|---|---|
 | `flat` | one package | single-purpose tools, scripts | collapses past ~10 modules |
 | `layer` | `ports/ adapters/ models/` | pattern visible at a glance; matches some FastAPI starter templates; good for teaching repos | every feature leg edits every folder; folders become junk drawers sorted by role |
-| `feature` | `parcels/ layers/`, each with its port and adapters | a feature leg mostly adds files to one folder; conventions checkable against sibling folders; deleting a feature = deleting a folder | pattern invisible in the tree; needs rules for shared code and sibling drift |
+| `feature` | `parcels/ layers/`, each with its interface and what implements it | a feature leg mostly adds files to one folder; conventions checkable against sibling folders; deleting a feature = deleting a folder | pattern invisible in the tree; needs rules for shared code and sibling drift |
 | `feature+layer` | `parcels/ports/ parcels/adapters/` | features with many adapters | nesting overkill for small features |
 
 ## Decision
@@ -43,7 +43,7 @@ Default: `feature`.
 4. I still write ports by hand. The port lives at `parcels/port.py` instead of `ports/parcels.py`. <!-- file name pinned in ADR-YYY -->
 
 ### Rules that ship with `feature`
-1. **Sibling rule.** Every feature folder copies the internal shape of the first one: one `port.py`, one module per adapter, tests mirrored under `tests/<feature>/`.
+1. **Sibling rule.** Every feature folder has the same internal shape: one interface file, one module per implementation, tests mirrored under `tests/<feature>/`. The interface file is `port.py` when the folder holds a port, and `base.py` when it holds an extension point. The swap test in ADR-YYY decides which: one-big-map's `parcels/` holds a port, and its `layers/` an extension point.
 2. **Shared-code rule.** Code moves to `shared/` only when a second feature imports it. Not before. (This is why one-big-map's `layers/` got its own base file instead of sharing one with `parcels/`.)
 3. **README line.** The tree can't show the architecture, so the README says it once: "Ports and adapters, packaged by feature."
 4. **Framework wins.** If the framework prescribes a layout, follow it and note that here. (Django apps are already features, so Django agrees with the default.)
