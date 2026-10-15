@@ -86,8 +86,9 @@ Memory:
 10. Read the main file(s) that are under review, and my grok file in
     `docs/DEVLOG/learn/g-<this-grok-file>.md`
 11. You may read any of these that apply to your work:
-	`~/repos/stack-notes/README.md` and any stack file
-	`~/repos/sprinter-kit/templates/docs/reviews/README.md` and any template file
+	- `~/repos/stack-notes/README.md` and any stack file
+	- `~/repos/sprinter-kit/templates/docs/reviews/README.md` and any template file
+    - `~/repos/sprinter-kit/docs/sprints/drafts/`: any draft referred to in instructions
 12. Beyond pre-flight, do NOT read anything else until you finish 1. EXPECT
 13. When a finding touches something I'm learning, you may use WebSearch and
     WebFetch to check it against official docs. Prefer the framework's own
