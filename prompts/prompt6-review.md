@@ -102,13 +102,14 @@ Do steps 1-6 for each file under review.
 
 1. EXPECT (written before you search the spec, repo tree, and other docs)
 
-   What the file under review should handle, from the file's own purpose and the
-   standards for its language and framework: inputs it must check, errors and edge
-   cases, what it must never do. Five to ten short lines. Don't revise them later;
-   the comparison needs them as you first wrote them. Each finding below says which
-   line it came from, or "found in the code". This is a "blind buddy check" to help
-   find gaps. Write your findings to the `e-` expecations file. The template is in
-   `~/repos/sprinter-kit/templates/docs/reviews/`
+   Read the files under review for this session. Then write the your expectations
+   in the `e-` expectations file. What should the file under review handle, from
+   the file's own purpose and the standards for its language and framework? e.g.
+   what inputs must it check, errors and edge cases, what it must never do. Write
+   five to ten short lines. Don't revise them later; the comparison needs them as
+   you first wrote them. Each finding should say which line it came from, or "found
+   in the code". This is a "blind buddy check" to help find gaps. The template is in
+   `~/repos/sprinter-kit/templates/docs/reviews/`.
 
 2. COMPARE TO ACTUAL
 
