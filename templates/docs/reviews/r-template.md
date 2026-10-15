@@ -19,12 +19,14 @@ r-<sprint>-<leg>-<short-description>.md
 ## Decide
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
    <!-- I will answer these, usually with help from the planning agent. -->
+   <!-- The review agent ticks a box here [x] only when it agrees the decision is
+        made and every item it requires is in one of the two checklists below. -->
 
 ## Decisions
 
   <!-- this is where I'll put my answers later. -->
-  <!-- mark any items here [c] captured when they are captured in the 
-       Coding Agent's Checklist below -->
+  <!-- mark any items here [c] → <item ids> when they are captured in the
+       Doc Edits Checklist or the Coding Agent's Checklist below -->
 
 ## Doc Edits Checklist (Spec Before Code!)
 
@@ -33,6 +35,7 @@ P# items go here: Docs updates, including housekeeping and techdebt to be captur
 
 Item rules:
 - The Review Agent completes doc edits before handoff to Coding Agent
+- End each item with the decision it comes from, `(D#)`, or the finding, `(E#)`.
 
 ## Coding Agent's Checklist
 
@@ -51,6 +54,7 @@ Item rules:
   `git grep --untracked -nE '<pattern>' -- ':/src' ':/tests'`. Plain git grep skips new
   files and reads paths from where you stand, so "no hits" can be a false pass.
 - An item a tracker already holds gets one line: `already tracked: <ID>`.
+- End each item with the decision it comes from, `(D#)`, or the finding, `(E#)`.
 - When an item needs text in a planning doc, write it ready to paste in that doc's
   format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
 - After you copy a paste block into its landed location, mark its boxes [c] captured

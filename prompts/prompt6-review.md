@@ -150,8 +150,9 @@ Do steps 1-6 for each file under review.
 3. RECORD DECISIONS NEEDED
 
    Now that you have all the information that the project docs and source code can
-   provide, compile and write the `D#` decisions needed in the `r-` review file, and
-   mark if any of the decisions block the leg or the demo. I will address these
+   provide, compile and write the `D#` decisions needed in the `r-` review file, each
+   as an open `- [ ]` box under `## Decide`, and mark if any of the decisions block the
+   leg or the demo. I will address these
    items and record the answers, usually with the help of the design agent. Start from
    D1 in each new `r-` file.
 
@@ -212,8 +213,12 @@ Stop and wait for me to resolve decisions. No commit.
     - Compile and write what doc updates are needed before coding begins
       in the `r-` file's Doc Edits Checklist
     - Compile and write coding agent tasks in the `r-` review file
-    - Mark the Decisions [x] when they are decided and the resulting ARs have been
-      moved to the coding agent's checklist section
+    - Under `## Decisions`, mark each action line `[c] → <item ids>` once its items
+      are in the Doc Edits Checklist or the Coding Agent's Checklist. Each checklist
+      item names the decision it comes from, e.g. `(D24)`, so the trail runs both ways.
+    - Tick a `## Decide` box `[x]` when you agree its decision is made and every item
+      it requires is captured in one of the two checklists. The Decide and Decisions
+      sections keep the order decision → action; the checklists keep execution order.
 
 6. LAND DOC EDITS
 
