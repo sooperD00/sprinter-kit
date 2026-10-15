@@ -40,7 +40,7 @@ files, or code blocks to paste, and no assert or function bodies written out in 
 An F item states the gap, what must hold when it's fixed (which changes must fail a
 test, which test names must exist, the suite count), and one check the agent runs. 
 The coding agent writes the code. You may write spec, design and doc wording to paste
-(P items) search commands, and the mutation lists you'll re-run. Scratch-copy code you write to measure an expect stays in the scratchpad and never goes into the r- file.
+(P items), search commands, and the mutation lists you'll re-run. Scratch-copy code you write to measure an expect stays in the scratchpad and never goes into the r- file.
 
 Files:
 ```
