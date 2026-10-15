@@ -35,6 +35,11 @@ P# items go here: Docs updates, including housekeeping and techdebt to be captur
 
 Item rules:
 - The Review Agent completes doc edits before handoff to Coding Agent
+- A P item is the review agent's unless it touches text a test reads
+- When an item needs text in a planning doc, write it ready to paste in that doc's
+  format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
+- After you copy a paste block into its landed location, mark its boxes [c] captured
+  here in the r- file.
 - End each item with the decision it comes from, `(D#)`, or the finding, `(E#)`.
 
 ## Coding Agent's Checklist
@@ -55,13 +60,8 @@ Item rules:
   files and reads paths from where you stand, so "no hits" can be a false pass.
 - An item a tracker already holds gets one line: `already tracked: <ID>`.
 - End each item with the decision it comes from, `(D#)`, or the finding, `(E#)`.
-- When an item needs text in a planning doc, write it ready to paste in that doc's
-  format: a Watch line `- (leg b) ...`, a tech-debt item `- [ ] [t-xxxxxx] ...`.
-- After you copy a paste block into its landed location, mark its boxes [c] captured
-  here in the r- file.
 - Code blocks are for P items (doc text) and C items (commands) only.
 - An answer to a [!] says which way to go and what must hold. If the coding agent proposed code in the flag, the answer may say "add what you measured," with any changes in words.
 - You may quote existing code (this is for basic communication)
 - You may name a new test function (it makes the suite count checkable)
 - The spec's code block counts as spec (not source code)
-- A P item is the review agent's unless it touches text a test reads
