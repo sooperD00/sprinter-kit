@@ -228,6 +228,8 @@ Stop and wait for me to resolve decisions. No commit.
       checklist, in the same turn as the code that makes it pass. List the sections
       the coding agent must read, by heading, at the top of the Coding Agent's
       Checklist, tagged **NEW WHITELIST**.
+    - Before you edit a file, check `git status --porcelain -- <file>`. If it shows
+      uncommitted changes, stop and flag it to me. Don't edit or commit around them.
 
 Stop and wait for me to review the diff before handoff.
 
