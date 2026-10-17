@@ -166,6 +166,9 @@ tech debt (deferred, probably a while); file in techdebt.md, mark [c]:
 - [ ] git push
 
 ## Done (when the human is satisfied)
-- [ ] the leg's heading says done YYYY-MM-DD (wait for human approval)
+- [ ] the leg's heading says done YYYY-MM-DD (handed off YYYY-MM-DD) (wait for human approval)
 - [ ] git commit -m "sprints: [s-<id>-<leg>] done"
+- [ ] git push
+- [ ] git tag -a s-<id>-<leg> -m "<sprint name>, leg <leg> closed: <what closed>"
+- [ ] git push origin s-<id>-<leg>
 end time: [YYYYmmDD-HHMM]
