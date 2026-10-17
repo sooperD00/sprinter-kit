@@ -22,14 +22,14 @@ The markers need to:
 1. Mark each level with its own mechanism, so the level is readable from the marker alone.
 2. Carry a summary of my review changes at the block level.
 3. Survive the normal workflow: push, rebase, PR merge.
-4. Keep the tag list short.
+4. Tag what closes, legs and sprints, not every block.
 
 ## Decision
 
 | Level | Marker | Made by | Carries |
 |---|---|---|---|
-| Sprint | annotated tag `sprint-<id>` | me | one line per leg |
-| Leg | PR merge commit | me, on GitHub | PR description built from the seals |
+| Sprint | annotated tag `sprint-<NNN>-<id>` | me | one line per leg |
+| Leg | annotated tag `s-<id>-<leg>`, and once legs are PRs, the PR merge commit it points at | me | the seals, as the tag message or the PR description |
 | Commit block | empty **seal** commit | me | one bullet per review change |
 | Commit | ordinary commit | agent or me | the change |
 
@@ -70,18 +70,18 @@ Newest first. The agent's commits come first in time; my review follows, block b
 2. Only the reviewer writes seals. An agent never seals its own block.
 3. Seals land in review order, after the agent's commits for the leg. Each seal follows my fix commits for its block, and its scope names the block, because the block's own commits sit earlier in the history.
 4. Legs merge with a merge commit. Squash and rebase merging are off in the repo settings (squash deletes the seals; rebase deletes the leg's merge commit).
-5. Tags mark sprints and nothing else.
+5. Every leg gets a tag when it closes: annotated, `s-<id>-<leg>`, the name documents already use for the leg (the handbook's "Close a leg"). Other tags are allowed; these are the ones that can't be skipped.
 
 ### Until legs are PRs
 
-A leg ends with an annotated tag `leg-<sprint-id>-<leg>`. The first leg that ships as a PR retires these tags, and the merge commit takes over.
+The leg's tag goes on its last seal, and its message carries the seals. Once a leg ships as a PR, the tag goes on the merge commit instead, and the PR description carries the seals.
 
 ## Consequences
 
 **Good**
 
 - The history tells the review story without the DEVLOG.
-- The tag count equals the sprint count.
+- Every closed leg has a tag, so `git tag -l 's-*'` lists them.
 - Each level's summary is assembled from the level below it:
 
 ```bash
