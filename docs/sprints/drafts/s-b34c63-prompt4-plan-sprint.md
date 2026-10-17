@@ -88,7 +88,6 @@ TURN 1: Read and propose. Write nothing.
      its Watches
    - Out of Scope, each item with a destination
    - an outline, headings only, of any file format or template the sprint creates
-4. Ask at most three questions.
 
 Stop here and wait for me.
 
@@ -99,7 +98,6 @@ TURN 2: Write, once I approve.
    its plan.md row. File each Out of Scope item that needs an ID.
 3. Write the first leg's reading list, by the handbook's "Reading lists", from the template.
    Link it from plan.md with the date.
-4. Open one pull request with all of it, and stop.
 
 If the planning system itself gets in your way, tell me, and we'll file it in
 housekeeping.md as a kit: item, the way the handbook says.
