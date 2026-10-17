@@ -2,6 +2,19 @@
 
 r-<sprint>-<leg>-<short-description>.md
 
+**Block:** <n>, <block name>, leg <leg> of [s-<id>]
+**Files under review:** <paths>
+**First commit of the block:** `<hash>`, the oldest commit in this block that touched a
+file under review. The seal commit's summary and its `Review-range` start here:
+`git log <hash>^..HEAD`.
+**Repo at review start:** `<hash>`, HEAD when this file was created. Every review commit
+comes after it.
+
+<!-- The review agent fills these four lines when it creates this file, before any review
+     commit. Find the first commit with
+     `git log --reverse --format='%h %ad %s' --date=short -- <files under review>`, and take
+     the first one that belongs to this block, not to an earlier leg. -->
+
 ## Vocabulary
 
 - RNU = Read and Understand
