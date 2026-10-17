@@ -27,6 +27,7 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | | `[s-cd5ee3]` | [Commit message conventions](remaining/sprint-cd5ee3-conventional-commits.md) | planned | — | — |
 | | `[s-7cc4a8]` | [Private-words guard and a setup guide](remaining/sprint-7cc4a8-private-words.md) | planned | [s-2f14eb] | — |
 | | `[s-319ddd]` | [Standing checks and the optional Python checks record](remaining/sprint-319ddd-standing-checks.md) | planned | [s-b34c63] | — |
+| | `[s-fc4d9e]` | [A clean-clone check and CI workflow that init installs](remaining/sprint-fc4d9e-clean-clone-ci.md) | planned | [s-319ddd] | — |
 | | `[s-b0557c]` | [Agent reflection process](remaining/sprint-b0557c-reflection.md) | planned | — | — |
 
 **Carry back.** Most sprints here change a template that projects already hold copies of. Each
