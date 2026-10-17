@@ -6,10 +6,28 @@ r-<sprint>-<leg>-<short-description>.md
 
 - RNU = Read and Understand
 - `[r]` = a reminder of a command expected to be *r*epeated during the review process
-- `[c]` = a marker that shows that the item was conceived here, but *c*aptured in the
-  place it should be done (housekeeping, techdebt, a sprint)
-- `[!]` = there's an issue, had to stop. Help needed. (usually spawns a separate or
-    nested item tree).
+- `[ ]` = open: not run, not done, or not decided yet
+- `[x]` = done. The one who ran it ticks it and records the `actual`. No commit hash.
+- `[c]` = conceived here, *c*aptured where it gets done (a checklist item, housekeeping,
+  techdebt, a sprint). Name where: `[c] → P43`, `[c] → [t-xxxxxx]`.
+- `[!]` = stopped: the expect itself was wrong, or help is needed. The reasoning or a
+  corrected command goes underneath, and any work it needs becomes a new item or a
+  Decide question.
+- `expect:` = what you see if it's fine, written by whoever wrote the item, before
+  anyone runs it. A command plus its result: `uv run pytest -q` reads `495 passed`.
+- `actual [ ]` = what it showed, filled in by whoever ran it. Empty brackets mean not
+  run yet. The brackets stay, so `grep 'actual \[ \]'` finds every unrun check.
+
+  - Match: say what it showed, not "ok": `actual [495 passed]`, `actual [no output]`.
+  - Drift (a count moved, a line number shifted): still `[x]`, with the real value and
+    the reason if it isn't obvious: `actual [497 passed: F58 added two tests]`.
+  - A wrong expect: `[!]`, never `[x]`. Write why under it, or a corrected command
+    with its own `expect:` and `actual [ ]`.
+
+    - [x] **P43.** <what to change> (D35)
+      - expect: `git grep -n 'contains the point' -- docs/interface-spec.md` prints nothing
+      - actual [no output]
+
 - `F` =  a fix to source or tests, described, not written: the gap, the expect, the check.
 - `P` = doc text: ok to provide "code" blocks, because this is not source code
 - `C` = commands: ok to provide "code" or "code" blocks in these items, because 
@@ -18,20 +36,7 @@ r-<sprint>-<leg>-<short-description>.md
 
 ## Expect and actual (both checklists)
 
-Whoever runs an item records what it showed under its expect:
-
-```markdown
-- [x] <command or look>
-    - expect: <what you see if it's fine>
-    - actual [<what it showed>]
-```
-
-- Match: record what it showed, e.g. `actual [2 passed]`, `actual [no output]`.
-- Mismatch that is only drift (a test count moved, a line number shifted): still `[x]`.
-  Record the real value, and the reason if it isn't obvious.
-- Mismatch where the expect itself was wrong: mark the item `[!]`, and under
-  `actual` write the reasoning, or a corrected command with its own expect and actual.
-  If the gap needs work, that becomes a new item, or a question under `## Decisions`.
+Every item has an `expect:` and an `actual [ ]`. The rules are in Vocabulary, above.
 
 ## Decide
      - [ ] Decide: <the choice>. My recommendation: <one line>, because <one line>.
