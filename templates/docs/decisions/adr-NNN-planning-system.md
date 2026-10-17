@@ -160,11 +160,22 @@ Two kinds of prompt get confused, so they are named here. **App prompts** ship w
 - Push the branch before the tag. A tag pointing at a commit nobody has is a tag nobody can check out.
 - Tag it `sprint-<NNN>-<id>`, which is the file name without its short name — so one grep finds the file, its row in the completed log, and the tag.
 
+## Close a leg — reserved to the maintainer
+
+The same steps as closing a sprint, for one leg, and the tag gets the leg letter.
+
+- Review the leg's work, then close and tag it. A leg handoff is not a close.
+- Set the leg's heading status to `done YYYY-MM-DD`, and keep its handoff date beside it: `--- done 2026-10-17 (handed off 2026-10-02)`.
+- Leave the sprint file in `remaining/`. Only the sprint's close moves it, and a leg never takes an `<NNN>`.
+- Push the branch before the tag.
+- Tag it `s-<id>-<leg>`, the name documents already use for the leg, e.g. `s-9cf8b9-c`. Make it an annotated tag whose message names the sprint and the leg, and says what closed.
+- After the last leg closes, close the sprint, which adds the sprint's own tag.
+
 ## Three clocks, on purpose
 
 - **handoff** — the work came back. Recorded on the leg and on the sprint, in the sprint file.
 - **commit** — git author dates. When the code was reviewed and blessed, atomically.
-- **tag** — `sprint-<NNN>-<id>`. The sprint closed: code blessed, docs passed, next sprint planned.
+- **tag** — `sprint-<NNN>-<id>`. The sprint closed: code blessed, docs passed, next sprint planned. A leg's tag, `s-<id>-<leg>`, says the same of one leg.
 
 Do not reconcile these against each other or against `git log`. They measure different events, and a sprint handed off one week and closed the next is a fact worth keeping, not a discrepancy to fix.
 
