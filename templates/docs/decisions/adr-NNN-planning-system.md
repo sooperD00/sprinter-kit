@@ -25,7 +25,7 @@ Anyone may do any step in this record, and everyone follows it whoever they are.
 | **Factor** | The class of thing a red suite would blame. |
 | **Appetite** | One sitting per leg for a person, and a leg that fits the context of the model named in `plan.md`. |
 | **Watch** | A known trap, written where the work is. |
-| **Status** | planned → in progress → handed off → done YYYY-MM-DD, or dropped, with the reason. A sprint with no place in the order yet is parked. Legs move through the same states, recorded on their headings. |
+| **Status** | planned → in progress → handed off → done YYYY-MM-DD, or dropped, with the reason. A sprint with no place in the order yet is parked. Legs move through the same states, recorded on their headings. A closed leg keeps its handoff date beside the done date: `done YYYY-MM-DD (handed off YYYY-MM-DD)`. |
 | **ASAP** | A sprint with a clock outside the repo: exposure, an expiry, a date somebody else set. It runs next, behind only the sprint in flight, and keeps its marker in `plan.md` until it closes. Insert it between that sprint's legs when the clock is short enough to be worth the context switch. Two at once means one of them is not. |
 | **Housekeeping** | Work with no home yet, which can join any sprint. |
 | **Tech debt** | Work deferred, probably for a while. |
@@ -139,7 +139,7 @@ Two kinds of prompt get confused, so they are named here. **App prompts** ship w
 
 - Check the leg's done-when list item by item, at the code rather than at the plan.
 - Write the leg's Landed line.
-- Record the leg's handoff date.
+- Record the leg's handoff date on its heading: `--- handed off YYYY-MM-DD`.
 - File what the leg shed: housekeeping items in `housekeeping.md`, tech debt in `techdebt.md`, each with a generated ID.
 - Confirm no cleanup marker naming this leg is left in the repo.
 - Update the docs the leg changed, tags and references included.
@@ -165,7 +165,7 @@ Two kinds of prompt get confused, so they are named here. **App prompts** ship w
 The same steps as closing a sprint, for one leg, and the tag gets the leg letter.
 
 - Review the leg's work, then close and tag it. A leg handoff is not a close.
-- Set the leg's heading status to `done YYYY-MM-DD`, and keep its handoff date beside it: `--- done 2026-10-17 (handed off 2026-10-02)`.
+- Set the leg's heading status to `done YYYY-MM-DD`, and keep its handoff date beside it: `--- done YYYY-MM-DD (handed off YYYY-MM-DD)`. The two dates are different clocks, and both stay.
 - Leave the sprint file in `remaining/`. Only the sprint's close moves it, and a leg never takes an `<NNN>`.
 - Push the branch before the tag.
 - Tag it `s-<id>-<leg>`, the name documents already use for the leg, e.g. `s-9cf8b9-c`. Make it an annotated tag whose message names the sprint and the leg, and says what closed.

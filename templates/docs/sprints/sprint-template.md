@@ -41,7 +41,8 @@ leave a red suite unable to say what broke it. -->
 
 <!-- At handoff, add under the leg:
 **Landed.** What the plan said, what actually happened, and the lesson worth carrying.
-and set the heading's status to `handed off YYYY-MM-DD`. -->
+and set the heading's status to `handed off YYYY-MM-DD`.
+At close, it becomes `done YYYY-MM-DD (handed off YYYY-MM-DD)`, keeping the handoff date. -->
 
 ## Out of Scope
 - something this sprint will not do → where it goes: a sprint's tag, a housekeeping or tech debt
