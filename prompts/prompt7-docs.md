@@ -149,6 +149,9 @@ Then say "Docs pass done: paste prompt4 in this session to plan the next leg," a
 
 # ─────── Process and Audience ───────────────────
 
+Write as if this repo is public: it may be already, and if it isn't, it may be one day.
+Nothing personal or secret goes into a repo file or a commit message.
+
 The application is for me, not for a portfolio, an exam or an assessment. I like a clean,
 professional repo without clutter: a doc earns its place if it will help me as a developer
 later, or help someone onboard as a collaborator or a user.

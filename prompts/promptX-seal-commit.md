@@ -7,4 +7,6 @@ Write the seal commit for review block <n> of [s-<id>-<leg>]: <block name>.
   `<first>` is the review file's "First commit of the block" line. Run the
   suite, and any other command a number comes from.
 - The reader is an engineer who has not seen this code or this review.
+- Write as if this repo is public: it may be already, and if it isn't, it may
+  be one day. Nothing personal or secret goes into the message.
 - Show me the message first. Commit it, empty, when I say so.

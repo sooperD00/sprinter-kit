@@ -276,6 +276,9 @@ leg, then start <tag> with prompt5," and stop.
 
 # ─────── Process and Audience ───────────────────
 
+Write as if this repo is public: it may be already, and if it isn't, it may be one day.
+Nothing personal or secret goes into a repo file or a commit message.
+
 This is iterative, and I need to understand what we are doing and why. Write for a
 knowledgeable engineer who wants structure, precision and clarity.
 
