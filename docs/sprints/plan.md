@@ -15,18 +15,19 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | NNN | id | name | status | depends on | reading list |
 |-----|----|------|--------|------------|--------------|
 | | `[s-b57080]` | [Essay and field guide templates](remaining/sprint-b57080-essay-field-guide.md) | in progress | — | [leg a](../reading/reading-list-for-b57080-a.txt), 2026-10-06 |
+| | `[s-b34c63]` | [The flip turn: a docs pass and the next plan at the end of every leg](remaining/sprint-b34c63-flip-turn.md) | planned | — | — |
 | | `[s-a0f5d1]` | [Review files as a shipped decision record](remaining/sprint-a0f5d1-review-files.md) | planned | — | — |
-| | `[s-b34c63]` | [Prompts parameterized by project files, and docs for the kit's wider scope](remaining/sprint-b34c63-prompts-project-state.md) | planned | [s-a0f5d1] | — |
-| | `[s-48ba8b]` | [Reading lists moved under sprints and converted to Markdown](remaining/sprint-48ba8b-reading-lists-move.md) | planned | [s-b34c63] | — |
+| | `[s-d6ac46]` | [Prompts that run unedited from the kit, and docs for its wider scope](remaining/sprint-d6ac46-run-from-kit.md) | planned | [s-a0f5d1], [s-b34c63] | — |
+| | `[s-48ba8b]` | [Reading lists moved under sprints and converted to Markdown](remaining/sprint-48ba8b-reading-lists-move.md) | planned | [s-d6ac46] | — |
 | | `[s-db928b]` | [A drafts folder for unadopted ideas](remaining/sprint-db928b-drafts-folder.md) | planned | — | — |
-| | `[s-06c862]` | [Test traceability tooling](remaining/sprint-06c862-test-traceability.md) | planned | [s-b34c63] | — |
+| | `[s-06c862]` | [Test traceability tooling](remaining/sprint-06c862-test-traceability.md) | planned | [s-d6ac46] | — |
 | | `[s-9abfbf]` | [Handbook wording and scan fixes](remaining/sprint-9abfbf-handbook-fixes.md) | planned | — | — |
 | | `[s-41a8b1]` | [Backlog prefixes and stack notes in planning](remaining/sprint-41a8b1-prefixes-stack-notes.md) | planned | — | — |
 | | `[s-484bd5]` | [Kinds for demos, design sessions and contracts](remaining/sprint-484bd5-kinds.md) | planned | — | — |
 | | `[s-2f14eb]` | [Commit hooks and linters for the kit](remaining/sprint-2f14eb-hooks-linters.md) | planned | — | — |
 | | `[s-cd5ee3]` | [Commit message conventions](remaining/sprint-cd5ee3-conventional-commits.md) | planned | — | — |
 | | `[s-7cc4a8]` | [Private-words guard and a setup guide](remaining/sprint-7cc4a8-private-words.md) | planned | [s-2f14eb] | — |
-| | `[s-319ddd]` | [Standing checks and the optional Python checks record](remaining/sprint-319ddd-standing-checks.md) | planned | [s-b34c63] | — |
+| | `[s-319ddd]` | [Standing checks and the optional Python checks record](remaining/sprint-319ddd-standing-checks.md) | planned | [s-d6ac46] | — |
 | | `[s-fc4d9e]` | [A clean-clone check and CI workflow that init installs](remaining/sprint-fc4d9e-clean-clone-ci.md) | planned | [s-319ddd] | — |
 | | `[s-b0557c]` | [Agent reflection process](remaining/sprint-b0557c-reflection.md) | planned | — | — |
 

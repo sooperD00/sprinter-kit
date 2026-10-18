@@ -13,7 +13,7 @@ Adds the Kinds the table is missing (demo or release prep, a design session, and
 
 **Entry gate:** none.
 
-**Why now** This repo's own design legs (`[s-a0f5d1-a]`, `[s-b34c63-a]`, `[s-2f14eb-a]`) have no Kind that fits, and one-big-map's demo pack runs as `feature` for want of one.
+**Why now** This repo's own design legs (`[s-a0f5d1-a]`, `[s-d6ac46-a]`, `[s-2f14eb-a]`) have no Kind that fits, and one-big-map's demo pack runs as `feature` for want of one.
 
 **Brings in:** `[h-37b121]` and the models/contracts Kind item (no ID yet) from one-big-map's housekeeping.md.
 **Drafts:** [sizing notes](../drafts/s-484bd5-sizing-and-design-gating-notes.md)

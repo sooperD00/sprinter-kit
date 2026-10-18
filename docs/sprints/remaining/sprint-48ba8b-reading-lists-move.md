@@ -13,7 +13,7 @@ Moves `docs/reading/` to `docs/sprints/reading/`, renames the lists from `.txt` 
 - d — carry back to one-big-map: `docs/reading/`, the links in `plan.md`, and its handbook copy.
 - e — the private devlog repo: every prompt's guard and read list, and leg-template.txt. You do this one, or hand that repo to an agent.
 
-**Entry gate:** required `[s-b34c63-c]` before leg a. The prompts' guards are rewritten there, and this changes one rule in them.
+**Entry gate:** required `[s-d6ac46-c]` before leg a. The prompts' guards are rewritten there, and this changes one rule in them.
 
 **Why now** Reading lists belong to sprints, and the `.txt` guard is a rule every new prompt has to restate.
 

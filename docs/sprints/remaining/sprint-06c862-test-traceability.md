@@ -12,7 +12,7 @@ Adds a collector that builds a traceability table for a review to fill in: each 
 - c — the review prompt calls it, and the handbook names the two passes: traceability (every spec rule maps to a test) and validity (each test checks what its name says).
 - d — carry back to one-big-map: a first run on `tests/contract/test_parcel.py`.
 
-**Entry gate:** required `[s-b34c63-a]` before leg a. The contract says where tool output lives and how a prompt calls a tool.
+**Entry gate:** required `[s-d6ac46-a]` before leg a. The contract says where tool output lives and how a prompt calls a tool.
 
 **Why now** The faab97 leg-a review found weak tests by hand, and the commands that check them already exist.
 

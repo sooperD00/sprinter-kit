@@ -1,7 +1,7 @@
 <!-- DRAFT for [s-b34c63]. It moves to prompts/prompt4-plan-sprint.md when that sprint lands.
 Written 2026-10-06 from four sources: the session that planned [s-b57080] in full, prompt3's
 TURN 3+, prompt7's "Sprint Plan Review" turn, and the design prompt that opened one-big-map's
-spec work. [s-b34c63] parameterizes it along with the other prompts; until then it calls the
+spec work. [s-d6ac46] parameterizes it along with the other prompts; until then it calls the
 planning ADR "the handbook", since each project numbers its own. The reasoning is the ADR-004
 draft beside it. -->
 

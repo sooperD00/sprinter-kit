@@ -11,7 +11,7 @@ Adds a STANDING CHECKS line to `plan.md` that every leg's done-when list opens w
 - b — the optional record, extracted from one-big-map's: Ruff with `extend-select`, a formatter-only commit listed in `.git-blame-ignore-revs`, pyright in standard mode, and ignores that name the rule and give a reason. init adds it with `--with python-checks`. Tool facts (versions, pyright fetching Node, the ty 1.0 recheck) go in the stack notes, not the record.
 - c — carry back to one-big-map: clear `[h-7da3ca]`.
 
-**Entry gate:** required `[s-b34c63-a]` before leg a, which decides what `plan.md` carries. Required before leg b, outside this repo: one-big-map's `[h-2c3eb1]`, `[h-f7478e]` and `[h-a211a0]` have landed. Since 2026-10-17 they are the three legs of one-big-map's `[s-8d5bb5]`.
+**Entry gate:** required `[s-d6ac46-a]` before leg a, which decides what `plan.md` carries. Required before leg b, outside this repo: one-big-map's `[h-2c3eb1]`, `[h-f7478e]` and `[h-a211a0]` have landed. Since 2026-10-17 they are the three legs of one-big-map's `[s-8d5bb5]`.
 
 **Why now** Not yet. Leg b extracts from a passing version, and one-big-map doesn't have one.
 

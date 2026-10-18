@@ -13,7 +13,7 @@ Defines how an agent reflects on finished work, with its own prompt and an outpu
 - d — the handbook's "Reflection" section, with `docs/sprints/reflection/` as the home. one-big-map has the folder already.
 - e — carry back to one-big-map.
 
-**Entry gate:** recommended `[s-a0f5d1]` and `[s-b34c63]`. Reflection reads review files, and runs from a prompt that follows the contract.
+**Entry gate:** recommended `[s-a0f5d1]` and `[s-d6ac46]`. Reflection reads review files, and runs from a prompt that follows the contract.
 
 **Why now** The loop has already run once by hand: a coding agent wrote weak tests, reflected on them, and proposed text for a test-writing record. The kit's ESSAY and the review-files record both promise a reflect agent.
 

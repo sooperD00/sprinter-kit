@@ -129,7 +129,7 @@ docs/reading/reading-list-template.txt           copy it to start a list
 - Place a cleanup marker the moment you leave something for later, naming the leg that will remove it. If no leg owns it yet, file it in `housekeeping.md` or `techdebt.md` and cite that ID instead — never leave the comment as the only record.
 - Add a Watch when you hit a trap, where the work is.
 
-Two kinds of prompt get confused, so they are named here. **App prompts** ship with the product and go to a model while it runs; this repo has none. **Dev prompts** run the sessions of this workflow: planning, coding, review and docs. Here they are public, in `prompts/`, and prompt N's reasoning is ADR-00N. Working notes stay in the untracked `DEVLOG/`. (This paragraph differs from the kit's template, which still calls dev prompts private; `[s-b34c63]` changes the template.) The planning artifacts that *do* live here are the sprint files, `plan.md`, and the reading lists.
+Two kinds of prompt get confused, so they are named here. **App prompts** ship with the product and go to a model while it runs; this repo has none. **Dev prompts** run the sessions of this workflow: planning, coding, review and docs. Here they are public, in `prompts/`, and prompt N's reasoning is ADR-00N. Working notes stay in the untracked `DEVLOG/`. (This paragraph differs from the kit's template, which still calls dev prompts private; `[s-d6ac46]` changes the template.) The planning artifacts that *do* live here are the sprint files, `plan.md`, and the reading lists.
 
 ## Hand off a leg
 
