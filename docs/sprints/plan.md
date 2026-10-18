@@ -15,7 +15,7 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | NNN | id | name | status | depends on | reading list |
 |-----|----|------|--------|------------|--------------|
 | | `[s-b57080]` | [Essay and field guide templates](remaining/sprint-b57080-essay-field-guide.md) | in progress | — | [leg a](../reading/reading-list-for-b57080-a.txt), 2026-10-06 |
-| | `[s-b34c63]` | [The flip turn: a docs pass and the next plan at the end of every leg](remaining/sprint-b34c63-flip-turn.md) | planned | — | — |
+| | `[s-b34c63]` | [Rolling wave planning, run as the flip turn at the end of every leg](remaining/sprint-b34c63-flip-turn.md) | planned | — | — |
 | | `[s-a0f5d1]` | [Review files as a shipped decision record](remaining/sprint-a0f5d1-review-files.md) | planned | — | — |
 | | `[s-d6ac46]` | [Prompts that run unedited from the kit, and docs for its wider scope](remaining/sprint-d6ac46-run-from-kit.md) | planned | [s-a0f5d1], [s-b34c63] | — |
 | | `[s-48ba8b]` | [Reading lists moved under sprints and converted to Markdown](remaining/sprint-48ba8b-reading-lists-move.md) | planned | [s-d6ac46] | — |

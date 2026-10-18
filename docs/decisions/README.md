@@ -14,8 +14,8 @@ the same one projects get.
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
 | 003 | spoken for: prompt3, the first sprint plan | — | — |
-| 004 | spoken for: prompt4, planning the next leg ([draft](../sprints/drafts/s-b34c63-adr-004-plan-sprint.md)) | — | — |
+| 004 | spoken for: prompt4, rolling wave planning: each stub planned in full when it's next, and each leg made ready ([draft](../sprints/drafts/s-b34c63-adr-004-plan-sprint.md)) | — | — |
 | 005 | spoken for: prompt5, a coding leg | — | — |
 | 006 | [How a Handed-Off Leg Is Reviewed](adr-006-review-sessions.md) | Accepted | 2026-10-05 |
-| 007 | spoken for: prompt7, the docs pass of the flip turn ([draft](../sprints/drafts/s-b34c63-adr-007-docs-session.md)) | — | — |
+| 007 | spoken for: prompt7, the flip turn: the docs pass, then planning, at the end of every leg ([draft](../sprints/drafts/s-b34c63-adr-007-docs-session.md)) | — | — |
 | 010 | [How Sprints Are Planned, Tracked and Closed](adr-010-planning-system.md) | Accepted | 2026-10-05 |
