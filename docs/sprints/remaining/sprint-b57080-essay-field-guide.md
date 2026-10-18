@@ -21,7 +21,7 @@ Decided in planning, 2026-10-06.
 
 - D1. A repo that already has `docs/ESSAY.md` or `docs/field-guide.md` keeps it. init leaves the file alone, lists it, and writes everything else. A dangling symlink at either path still stops init, as any blocked path does.
 - D2. The handbook doesn't change. Neither file is a planning file, and reviewers reach the field guide through pointers in the code. So this repo's own copies have nothing to carry back.
-- D3. The field guide's entry rules live in a comment in its template, and the comment says to keep it. People read the field guide for its terms; agents read the raw file. prompt6 and prompt7 restate these rules today, until `[s-d6ac46]` points them at the comment. The rules:
+- D3. The field guide's entry rules live in a comment in its template, and the comment says to keep it. People read the field guide for its terms; agents read the raw file. prompt6 restates these rules today, until `[s-d6ac46]` points it at the comment. The rules:
   - The test: could a strong engineer with no background in this domain tell whether a line of code is right? If not, and what's missing is domain knowledge rather than code knowledge, it's an entry.
   - Look for numbers and limits with a domain reason; orders and conventions that come from a standard or a data source (axis order, units, ID formats); deliberate omissions that look like bugs; domain names and acronyms in identifiers, docstrings and comments; standards cited with no explanation.
   - Skip language and library mechanics, which are code knowledge. Why the project chose one thing over another belongs in design.md or a decision record.
@@ -117,7 +117,7 @@ Used by: `<module>`
 **Watch** one-big-map has other agents working in it. The carry back is a branch and a pull request, never a push to main. Branch from main as it is that day.
 
 ## Out of Scope
-- prompt6 and prompt7 restate the field guide's entry rules → `[s-d6ac46]` points them at the template
+- prompt6 restates the field guide's entry rules → `[s-d6ac46]` points it at the template
 - whether planners read the essay → `[s-b34c63]`, whose prompt4 decides what the planner reads
 - an implementation-plan template → `[h-8976df]`
 - [~] a field guide for the kit itself: not done because the kit's terms already live in its handbook's Vocabulary and its ESSAY
