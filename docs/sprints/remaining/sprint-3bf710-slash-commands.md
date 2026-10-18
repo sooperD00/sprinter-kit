@@ -17,7 +17,7 @@ Adds `sprinter.py link`, which makes each prompt in `prompts/` a Claude Code sla
 
 **Watch** The hand-made `~/.claude/skills/sprinter-kit-plan/` from 2026-10-17 has no marker, so link reports it and leaves it alone. Delete that folder before the first run after prompt4 moves.
 
-**Watch** link takes no `--repo`. Don't route it through `repo_root()`, or it inherits `[h-fec4e6]`'s refusal to run in the kit's own repo.
+**Watch** link takes no `--repo`. Don't route it through `repo_root()`, or it inherits the refusal to run in the kit's own repo (`[s-9abfbf-b]`, filed as `[h-fec4e6]`).
 
 **Watch** sprinter.py supports Python 3.8, and `write_text(newline=)` arrived in 3.10. The draft writes through `open(..., newline="\n")`.
 
