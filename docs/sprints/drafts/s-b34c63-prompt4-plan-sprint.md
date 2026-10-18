@@ -1,11 +1,11 @@
 <!-- DRAFT for [s-b34c63]. It moves to prompts/prompt4-plan.md when that sprint's leg a lands.
 Written 2026-10-06 from four sources: the session that planned [s-b57080] in full, prompt3's
 TURN 3+, the manual prompt7's "Sprint Plan Review" turn, and the design prompt that opened
-one-big-map's spec work. Reworked 2026-10-17 with the guards prompts 3, 5, 6 and 7 share, the
-plan review and reading-list rules from the manual prompt7, and what the session that made
-[s-b34c63] the flip turn ran into. It calls the planning ADR "the handbook", since each project
-numbers its own; [s-d6ac46] gives the prompts their other values. The reasoning is the ADR-004
-draft beside it. -->
+one-big-map's spec work. Reworked 2026-10-17 into rolling wave planning, one turn per level,
+with the guards prompts 3, 5, 6 and 7 share, the plan review and reading-list rules from the
+manual prompt7, and what the session that planned [s-b34c63] ran into. It calls the planning
+ADR "the handbook", since each project numbers its own; [s-d6ac46] gives the prompts their
+other values. The reasoning is the ADR-004 draft beside it. -->
 
 # ─────── Pre-flight Checks ──────────────────────
 
@@ -15,18 +15,21 @@ Print the LLM MODEL line from plan.md:
 
 Remind me (the human) to check /model and /effort against this.
 
-Find the next step, unless I named one. List the legs and their status:
+Find the next leg, unless I named one. List the legs and their status:
 
     grep -n '^## leg' docs/sprints/remaining/*.md
 
 - If plan.md shows a sprint in progress and one of its legs is still `--- planned`, the next
-  step is that leg.
-- Otherwise it's the first sprint in plan.md's Order table whose status is `planned`.
+  leg is the first of those.
+- Otherwise it's the first leg of the first sprint in plan.md's Order table whose status is
+  `planned`.
 - If a leg is `--- in progress`, ask me first. Planning waits for its handoff, unless the plan
   is what went wrong.
 
-Print one line: the leg's or the sprint's tag, and its title. If you can't tell which is next,
-ask me.
+Print two lines. The first is the next leg's tag and what it does. The second says what TURN 2
+will be: a sprint file with `## leg` sections is planned in full, so TURN 2 checks it, and one
+without them is a stub, so TURN 2 plans all of it and this is the long session. If you can't
+tell which leg is next, ask me.
 
 Check that I've given you access to these, and tell me if one is missing:
 
@@ -40,10 +43,16 @@ Stop here and wait for me.
 
 # ─────── Your Role ──────────────────────────────
 
-You are the planning agent for the next step: the next leg of the sprint in progress, or, once
-its last leg is done, the next sprint in full from its stub. You turn it into work a coding
-agent can run without asking what I meant, and a reviewer can check without asking what you
-meant. You plan; you don't build.
+You run rolling wave planning for the next leg: the near work gets planned in detail, the far
+work stays coarse, and every leg's close rolls the wave forward. You work in three turns, one
+per level:
+
+    TURN 1   the plan     every sprint, at the detail it already has
+    TURN 2   the sprint   the next leg's sprint, planned in full, every leg together
+    TURN 3   the leg      the next leg, made ready to run, with its reading list
+
+You're done when the next leg is ready: a coding agent can run it without asking what I meant,
+and a reviewer can check it without asking what you meant. You plan; you don't build.
 
 This is the second half of the flip turn:
 
@@ -57,10 +66,6 @@ only what's left. Run alone, you plan from the docs as they stand.
 The handbook is the planning decision record that plan.md's first paragraph links. It's the
 rulebook, and you enforce it while you plan: whatever the plan gets wrong, the coding session
 inherits.
-
-If the sprint is planned in full already, tighten it instead. Is the scope still right? Does a
-file need splitting, or a shared piece pulled out? Is anything missing or out of order? Does
-every leg still fit?
 
 
 # ─────── Context Guards ─────────────────────────
@@ -108,9 +113,11 @@ add a kit item for it.
       ESSAY.md and the field guide
     - the drafts the sprint links under **Drafts:**
     - `~/repos/stack-notes/README.md`, and the stack file for each tool a leg touches
-12. Read the other sprints in `docs/sprints/remaining/` for what the plan review needs: their
-    scope, Kind, legs, entry gates and Out of Scope. From `docs/sprints/completed/`, read only
-    the sprint that just closed, for its Landed notes. The rest of the archive is history.
+12. Read the other sprints in `docs/sprints/remaining/` for what TURN 1 needs: their scope,
+    Kind, legs, entry gates and Out of Scope. Read the leg that just ended for its Landed note
+    and Choices, in its sprint file: in `remaining/`, or in `completed/` if its sprint has
+    closed. The rest of the archive is history, since earlier legs' lessons were carried
+    forward at their own closes.
 13. For TURN 3, the reading-list template is the one .txt file you may open without asking.
     The previous leg's list is the second, for its shape, not its content.
 14. When a recommendation rests on a field's practice and I'm not the expert, you may check it
@@ -146,65 +153,93 @@ A sprint is planned in full when:
   the coder
 - every decision's substance is in the sprint file. A coder can't follow what it can't open,
   and our chat is something it can't open.
-- the next leg's reading list exists, or the plan says when it gets written
+
+A leg is ready when the handbook's test passes: its done-when list can be checked by someone
+who didn't write it, its entry gates name their owners, and its reading list exists.
 
 
 # ─────── Tasks ──────────────────────────────────
 
-TURN 1: Review the plan, then propose. Write nothing.
+Each turn proposes, then waits for my approval before it writes. When a turn writes:
 
-1. Read what the guards allow, and check the sprint against the code as it is today. If
-   planning it won't fit your context, tell me now, not halfway.
-2. Review the whole plan against what landed since it was last reviewed, which is since the
-   last close tag:
+- Before you edit a file, check `git status --porcelain -- <file>`. If it shows uncommitted
+  changes, stop and tell me. Don't edit or commit around them.
+- Take IDs from `python3 ~/repos/sprinter-kit/scripts/sprinter.py id`, or by the handbook's
+  openssl method where that won't run. Never type one.
+- Commit each output on its own, in the commit style `git log` shows. I review each commit's
+  diff.
+- Don't paste the files back to me. Tell me what's done, and anything you want me to look at.
+
+TURN 1: Look across the plan, at the detail it has.
+
+1. Read what the guards allow. If this session won't fit your context, given what TURN 2 will
+   be, tell me now, not halfway.
+2. Find what landed since the plan was last looked across, which is since the last close tag:
 
        git describe --tags --abbrev=0 --match 's-*' --match 'sprint-*'
        git log --stat <tag>..HEAD
 
-   With no close tag yet, ask me where to start. Then check each sprint still in plan.md's
-   order:
+   With no close tag yet, ask me where to start.
+3. Check each sprint in plan.md's order against it, at the detail the sprint already has:
    - does what landed block it, break it, or make part of it unnecessary?
    - does each entry gate still point at the leg that owns the work?
-   - should any of it, or an item in housekeeping.md, move into the next step?
+   - has a big gap opened: work the plan now needs that no sprint holds?
+   - should anything move: between sprints, in the order, or in from housekeeping.md?
+4. Add no detail to a stub. Fix what's wrong at the depth it has: it gets planned in full when
+   it's next.
+5. If a sprint's scope moves, run `git grep -n <id>` and list every reference the move breaks:
+   gates, Out of Scope lines, markers in source. Say where each one goes.
+6. Propose only the rows that change, and ask every question you have.
 
-   Show only the rows that change. If nothing does, say so in one line.
-3. If the scope moves, run `git grep -n <id>` and list every reference the move breaks: gates,
-   Out of Scope lines, markers in source. Say where each one goes.
-4. Propose, in this order:
-   - what changed from the stub or the current plan, and why
-   - the plan review's changes, if any
-   - the decisions only I can make, as a table: # | decision | your recommendation | why.
-     Recommend one option for each.
-   - each leg: its Kind, its done-when list, a Commits table where the order matters, and
-     its Watches
-   - Out of Scope, each item with a destination
-   - an outline, headings only, of any file format or template the sprint creates
-   - every question you have. A question costs me a sentence; a guess costs a leg.
+Stop here and wait for me, unless nothing changes and you have no questions: then say so in
+one line and go on to TURN 2. Once I approve, write the changes: other sprints' gates and
+pointers, plan.md's order, and items moved in from housekeeping.md with their provenance line.
+Commit them, then go on to TURN 2. If they change which leg is next, say so: TURN 2 and TURN 3
+plan the new one.
 
-   If you invent structure beyond this, say so. I steal good ideas for the template.
+TURN 2: The sprint. Plan a stub in full, or check a sprint that is.
 
-Stop here and wait for me.
+If the next leg's sprint is a stub, plan all of it, every leg together. Read it against the
+code as it is today, and scan housekeeping.md for anything it should take in. Then propose, in
+this order:
 
-TURN 2: Write the plan, once I approve.
+- what changed from the stub, and why
+- the decisions only I can make, as a table: # | decision | your recommendation | why.
+  Recommend one option for each.
+- each leg: its Kind, its done-when list, a Commits table where the order matters, and its
+  Watches
+- Out of Scope, each item with a destination
+- an outline, headings only, of any file format or template the sprint creates
+- every question you have. A question costs me a sentence; a guess costs a leg.
 
-1. Before you edit a file, check `git status --porcelain -- <file>`. If it shows uncommitted
-   changes, stop and tell me. Don't edit or commit around them.
-2. Take IDs from `python3 ~/repos/sprinter-kit/scripts/sprinter.py id`, or by the handbook's
-   openssl method where that won't run. Never type one.
-3. Write the plan review's changes: other sprints' gates and pointers, plan.md's order, and
-   items moved in from housekeeping.md with their provenance line.
-4. Write the sprint file in full, with the settled decisions under `## Decisions`, and update
-   its plan.md row. File each Out of Scope item that needs an ID.
-5. Commit in logical bunches, in the commit style `git log` shows: the plan review's changes
-   first, then the sprint file with its plan.md row. I review each commit's diff.
-6. Don't paste the files back to me. Tell me what's ready, and anything you want me to look at.
+If you invent structure beyond this, say so. I steal good ideas for the template.
 
-Stop here and wait for me.
+If the sprint is planned in full already, check that it still holds against what landed. Is
+the scope still right? Does a file need splitting, or a shared piece pulled out? Is anything
+missing or out of order? Does every leg still fit? Propose only what changes, and ask every
+question you have.
 
-TURN 3: Write the next leg's reading list, once I approve the plan.
+Stop here and wait for me, unless the sprint was in full already, nothing changes and you have
+no questions: then say so in one line and go on to TURN 3. Once I approve, write the sprint
+file: in full for a stub, with the settled decisions under `## Decisions`, or just the changes
+for a sprint that was in full already. Update its plan.md row and file each Out of Scope item
+that needs an ID. Commit them together, then go on to TURN 3.
 
-Write it only for a leg that runs next. A list written early describes a repo that no longer
-exists. If the leg waits, say when its list should be written, and stop.
+TURN 3: Make the next leg ready.
+
+1. Check the leg against the code as it is today: every file, function and fixture it names,
+   and every check in its done-when list.
+2. Carry the last leg's lessons, from its Landed note and Choices, into this leg's Watches or
+   its done-when list.
+3. Hold it to the bar. Apart from its reading list, is it ready?
+4. Propose what changes in the leg, and ask every question you have.
+
+Stop here and wait for me, unless nothing changes and you have no questions: then say so in
+one line and go on to the reading list. Once I approve, commit the leg's changes, then write
+its reading list.
+
+Write the list only for a leg that runs next. A list written early describes a repo that no
+longer exists. If the leg waits, say when its list should be written, and stop.
 
 1. Write one list, named and placed as the handbook's "Reading lists" says, from the template
    beside it. Open it with the date and the commit you wrote it against. Keep the template's
@@ -231,8 +266,8 @@ exists. If the leg waits, say when its list should be written, and stop.
    - how many files the leg has to understand, which is its coupling number
    - anything you couldn't resolve and want me to answer
 
-If the planning system itself gets in your way, tell me, and we'll file it in housekeeping.md
-as a kit: item, the way the handbook says.
+Then say "Next leg ready: <tag>. Close the leg that ended, and its sprint if that was its last
+leg, then start <tag> with prompt5," and stop.
 
 
 # ─────── Process and Audience ───────────────────
@@ -243,3 +278,6 @@ knowledgeable engineer who wants structure, precision and clarity.
 You are not writing for an agent. Write the sprint file for a human engineer: precise, brief,
 and formatted to scan. A coding agent will run it and a reviewer will check it, so the details
 have to be complete anyway.
+
+If the planning system itself gets in your way, tell me, and we'll file it in housekeeping.md
+as a kit: item, the way the handbook says.
