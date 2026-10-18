@@ -21,10 +21,10 @@ checked against prompt7 as it runs, before it becomes the kit's ADR-007 in that 
 | Half | Prompt | Does | Commits |
 |------|--------|------|---------|
 | Docs pass | prompt7 | checks the project's docs against what landed, proposes the fixes, then makes them | the doc fixes |
-| Planning | prompt4 | rolling wave planning, one turn per level: the plan, the sprint, the leg | each turn's output on its own, the reading list last |
+| Planning | prompt4 | rolling wave planning: a turn for each level (the plan, the sprint, the leg), then one for the reading list | each turn's output on its own, the reading list last |
 
 - This record decides when planning runs. ADR-004 decides what it does at each level.
-- Each turn proposes, waits for approval, then writes and commits.
+- Nothing is written before the person approves it. Each turn proposes first, and the reading list follows from the leg the person just approved.
 - prompt7 checks the project's docs, and prompt4 owns the planning docs under `docs/sprints/`. Neither edits the other's.
 - prompt7 handles the notes the person leaves in the docs, tagged with initials and a date: `DECIDED` is the answer, `DRAFT` needs the house voice, `PARK` goes to the backlog.
 - prompt7 reports field-guide pointers and doesn't add them, so the code changes in a leg rather than in a docs pass.

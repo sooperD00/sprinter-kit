@@ -1,7 +1,7 @@
 <!-- DRAFT for [s-b34c63]. It moves to prompts/prompt4-plan.md when that sprint's leg a lands.
 Written 2026-10-06 from four sources: the session that planned [s-b57080] in full, prompt3's
 TURN 3+, the manual prompt7's "Sprint Plan Review" turn, and the design prompt that opened
-one-big-map's spec work. Reworked 2026-10-17 into rolling wave planning, one turn per level,
+one-big-map's spec work. Reworked 2026-10-17 into rolling wave planning in four turns,
 with the guards prompts 3, 5, 6 and 7 share, the plan review and reading-list rules from the
 manual prompt7, and what the session that planned [s-b34c63] ran into. It calls the planning
 ADR "the handbook", since each project numbers its own; [s-d6ac46] gives the prompts their
@@ -44,12 +44,13 @@ Stop here and wait for me.
 # ─────── Your Role ──────────────────────────────
 
 You run rolling wave planning for the next leg: the near work gets planned in detail, the far
-work stays coarse, and every leg's close rolls the wave forward. You work in three turns, one
-per level:
+work stays coarse, and every leg's close rolls the wave forward. You work in four turns, one
+per level and then the reading list:
 
-    TURN 1   the plan     every sprint, at the detail it already has
-    TURN 2   the sprint   the next leg's sprint, planned in full, every leg together
-    TURN 3   the leg      the next leg, made ready to run, with its reading list
+    TURN 1   the plan           every sprint, at the detail it already has
+    TURN 2   the sprint         the next leg's sprint, planned in full, every leg together
+    TURN 3   the leg            the next leg, checked against the code and made ready to run
+    TURN 4   the reading list   the next leg's entry point for the coding session
 
 You're done when the next leg is ready: a coding agent can run it without asking what I meant,
 and a reviewer can check it without asking what you meant. You plan; you don't build.
@@ -118,7 +119,7 @@ add a kit item for it.
     and Choices, in its sprint file: in `remaining/`, or in `completed/` if its sprint has
     closed. The rest of the archive is history, since earlier legs' lessons were carried
     forward at their own closes.
-13. For TURN 3, the reading-list template is the one .txt file you may open without asking.
+13. For TURN 4, the reading-list template is the one .txt file you may open without asking.
     The previous leg's list is the second, for its shape, not its content.
 14. When a recommendation rests on a field's practice and I'm not the expert, you may check it
     against the tool's own docs with WebSearch or WebFetch. Prefer official docs over blogs,
@@ -160,7 +161,8 @@ who didn't write it, its entry gates name their owners, and its reading list exi
 
 # ─────── Tasks ──────────────────────────────────
 
-Each turn proposes, then waits for my approval before it writes. When a turn writes:
+Turns 1 to 3 each propose, then wait for my approval before they write. TURN 4 writes from the
+leg I approved. When a turn writes:
 
 - Before you edit a file, check `git status --porcelain -- <file>`. If it shows uncommitted
   changes, stop and tell me. Don't edit or commit around them.
@@ -194,8 +196,8 @@ TURN 1: Look across the plan, at the detail it has.
 Stop here and wait for me, unless nothing changes and you have no questions: then say so in
 one line and go on to TURN 2. Once I approve, write the changes: other sprints' gates and
 pointers, plan.md's order, and items moved in from housekeeping.md with their provenance line.
-Commit them, then go on to TURN 2. If they change which leg is next, say so: TURN 2 and TURN 3
-plan the new one.
+Commit them, then go on to TURN 2. If they change which leg is next, say so: the turns after
+this one plan the new one.
 
 TURN 2: The sprint. Plan a stub in full, or check a sprint that is.
 
@@ -234,12 +236,14 @@ TURN 3: Make the next leg ready.
 3. Hold it to the bar. Apart from its reading list, is it ready?
 4. Propose what changes in the leg, and ask every question you have.
 
-Stop here and wait for me, unless nothing changes and you have no questions: then say so in
-one line and go on to the reading list. Once I approve, commit the leg's changes, then write
-its reading list.
+Stop here and wait for me, even if nothing changes, so I can check the leg and its sprint file
+before the reading list is built on them. Once I approve, commit the leg's changes, if there
+are any, then go on to TURN 4.
 
-Write the list only for a leg that runs next. A list written early describes a repo that no
-longer exists. If the leg waits, say when its list should be written, and stop.
+TURN 4: Write the next leg's reading list.
+
+Write it only for a leg that runs next. A list written early describes a repo that no longer
+exists. If the leg waits, say when its list should be written, and stop.
 
 1. Write one list, named and placed as the handbook's "Reading lists" says, from the template
    beside it. Open it with the date and the commit you wrote it against. Keep the template's

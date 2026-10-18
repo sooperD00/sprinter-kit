@@ -25,7 +25,7 @@ kit's ADR-004 when that sprint's leg a lands. -->
 | The sprint | planned in full, every leg | a stub that's next is planned in full; a sprint already in full is checked |
 | The leg | ready | the next leg is checked against the code as it landed, takes in the last leg's lessons, and gets its reading list |
 
-- Run the levels in order, each in a turn of its own. A level with nothing to change and no question says so in one line, and the session goes on to the next: a quiet level costs the person a line, not a stop.
+- Run the levels in order, each in a turn of its own, and write the reading list in a fourth. When the plan or the sprint level has nothing to change and no question, it says so in one line and the session goes on: a quiet level costs the person a line, not a stop.
 - The sprint level sets the session's size. After a leg in the middle of a sprint it's a check, and the session is short. After a sprint's last leg, the next leg sits in a stub, and planning that stub in full is most of the session.
 - prompt3 builds the three levels once: every sprint as a stub, the first sprint in full, and its first leg ready. prompt4 rolls them forward.
 - Run planning as the second half of the flip turn, after the docs pass. Run it alone when ADR-007 says the docs pass can wait.
@@ -50,7 +50,7 @@ kit's ADR-004 when that sprint's leg a lands. -->
 - Check the leg against the code as it landed: the files, functions and fixtures it names, and the checks in its done-when list.
 - Carry the last leg's lessons, from its Landed note and Choices, into this leg's Watches or done-when list. A lesson left in a Landed note gets read once, by the reviewer.
 - The leg is ready when the handbook's test passes: its done-when list can be checked by someone who didn't write it, its entry gates name their owners, and its reading list exists.
-- Write the reading list last, only for a leg that runs next, and against the code as it is that day.
+- Write the reading list last, in a turn of its own, only for a leg that runs next, and against the code as it is that day. The leg's turn always stops before it, even when nothing changed, so the person can check the leg before the list is built on it.
 - Point at the leg's Watches instead of restating them. Judgment belongs in the sprint file, which outlives the leg. The list is thrown away when the leg closes.
 - Measure what the leg is about to destroy, and stop there. A planner that prototypes the change does the build to find out how the build goes.
 - When the list finds a gap, fix the sprint file first, in its own commit. The next planner reads the plan, not a list that's been thrown away.
