@@ -16,3 +16,9 @@ about fifty unassigned items, hold a planning session before adding features.
       default, and that needs a design pass of its own. It would land as a sprint after
       `[s-b57080]`, reusing that sprint's rule for a project's own copies.
       (From [s-b57080]'s Out of Scope, 2026-10-06.)
+- [ ] [h-616c5d] A reading list for the person: each agent step names what the person reads
+      while it runs, as data the console can show. Pairs with stop modes (stop, don't stop,
+      stop when conditions hold), where an unread backlog can be a condition. The kit
+      declares what to read; the console decides when and how, and keeps read state.
+      Draft and references: [h-616c5d-human-reading.md](drafts/h-616c5d-human-reading.md).
+      (Raised while reviewing the kit, 2026-10-17.)
