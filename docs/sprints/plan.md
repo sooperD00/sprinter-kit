@@ -21,7 +21,7 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | | `[s-48ba8b]` | [Reading lists moved under sprints and converted to Markdown](remaining/sprint-48ba8b-reading-lists-move.md) | planned | [s-d6ac46] | — |
 | | `[s-db928b]` | [A drafts folder for unadopted ideas](remaining/sprint-db928b-drafts-folder.md) | planned | — | — |
 | | `[s-06c862]` | [Test traceability tooling](remaining/sprint-06c862-test-traceability.md) | planned | [s-d6ac46] | — |
-| | `[s-9abfbf]` | [Handbook wording and scan fixes](remaining/sprint-9abfbf-handbook-fixes.md) | planned | — | — |
+| | `[s-9abfbf]` | [Handbook wording and sprinter.py fixes](remaining/sprint-9abfbf-handbook-fixes.md) | planned | — | — |
 | | `[s-41a8b1]` | [Backlog prefixes and stack notes in planning](remaining/sprint-41a8b1-prefixes-stack-notes.md) | planned | — | — |
 | | `[s-484bd5]` | [Kinds for demos, design sessions and contracts](remaining/sprint-484bd5-kinds.md) | planned | — | — |
 | | `[s-2f14eb]` | [Commit hooks and linters for the kit](remaining/sprint-2f14eb-hooks-linters.md) | planned | — | — |
