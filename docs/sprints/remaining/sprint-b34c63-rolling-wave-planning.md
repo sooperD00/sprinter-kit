@@ -13,4 +13,4 @@ Makes rolling wave planning the way the plan moves forward, in the flip turn at 
 
 **Why now** `[s-d6ac46]` rewrites prompt4 once it has landed, and three sprints wait on `[s-d6ac46]`. Until then the flip turn runs from drafts, which nothing may cite as a reason.
 
-**Drafts:** [prompt4](../drafts/s-b34c63-prompt4-plan-sprint.md), [ADR-004](../drafts/s-b34c63-adr-004-plan-sprint.md) and [ADR-007](../drafts/s-b34c63-adr-007-docs-session.md).
+**Drafts:** [prompt4](../drafts/s-b34c63-prompt4-plan.md), [ADR-004](../drafts/s-b34c63-adr-004-rolling-wave-planning.md) and [ADR-007](../drafts/s-b34c63-adr-007-flip-turn.md).
