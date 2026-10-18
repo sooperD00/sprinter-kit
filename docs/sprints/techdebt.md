@@ -22,3 +22,9 @@ IDs are identity, not order: nothing here is renumbered, and the count is what m
       big to read every assertion by hand, or once `[s-06c862]`'s traceability table is
       routine and the gaps it misses are validity, not coverage.
       (Raised in one-big-map's faab97 leg-a review, 2026-10-05.)
+- [ ] [t-fdfca5] A pull-request workflow, so the work can be driven remotely instead of from a
+      shell on the machine that holds the repo. Each planning output and each leg would land on
+      a branch and merge through a pull request, which also makes approving a plan and
+      starting its code separate clicks. It waits until coding, review and planning work end
+      to end on main, so the switch changes one thing at a time.
+      (Raised while planning [s-b34c63], 2026-10-17.)
