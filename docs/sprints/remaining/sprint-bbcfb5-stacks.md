@@ -23,4 +23,6 @@ Lets init write a project's commands for the stack it runs, with `--stack python
 
 **Watch** `[s-fc4d9e-a]` decides what CI is stack-agnostic. Use these three option names there, so CI steps key on the same blocks.
 
+**Watch** `[s-a825cd]` moves leg b's dependency blocks into a decision record. Write each stack's block so it moves whole.
+
 **Carry back:** none. Repos that took the kit before this sprint already carry their own stack's commands.
