@@ -39,7 +39,7 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 sprint file lists those copies under Carry back, `— pending` until the update lands, and lists
 what it took from a project under Brings in, by the item's own ID. The project's item stays put
 until its carry back lands. `git grep -n -- '— pending$' docs/sprints` lists what is still owed.
-`[s-41a8b1]` decides whether this becomes a handbook rule.
+ADR-010's "Carry back a kit change" is the rule.
 
 **depends on** names required entry gates only. Each sprint file carries the full gate line,
 recommended gates included, pointing at the leg that owns the work. Anything not named here may

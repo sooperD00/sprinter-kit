@@ -196,6 +196,19 @@ Do not reconcile these against each other or against `git log`. They measure dif
 - Source may cite an `[h-` or `[t-` item, under the rules in Tags in source. What it may not do is be the only record: the ID exists because the item is in a list, and the day it gets a sprint the reference becomes that sprint's marker.
 - File a change to the planning system itself (this record, its templates, the kit's scripts) in `housekeeping.md` as `[h-<id>] kit: <what and why>`. sprinter-kit's README says how those get reviewed.
 
+## Carry back a kit change
+
+A carry back takes a change the kit made to its templates into a project that already holds a copy. sprinter-kit runs carry backs; a project receives them as pull requests.
+
+- List the projects a kit sprint owes under **Carry back**, one line each: `<project>, on branch kit-sync/<id> — pending`. Owe every project that adopted the kit before the sprint (`ls ~/repos/*/docs/decisions/*-planning-system.md` finds them). A project that adopts later already has the change and gets no line.
+- List what the sprint took from a project under **Brings in**, by the item's own ID. The item keeps its ID, and stays in the project's list until its carry back merges. The carry back is what clears it.
+- Update the kit's own copies in the same commit that changes the template. They never get a Carry back line.
+- Carry back in the sprint's last leg. In each project, branch `kit-sync/<id>` from that day's main, commit the template change, then clear the brought-in items in a commit of their own.
+- Open a pull request, never a push to main: other agents work in these repos. The pull request names the kit sprint and links the kit commit it carries.
+- Close each line one of two ways: `— merged YYYY-MM-DD, PR #N`, or `— skipped YYYY-MM-DD: <reason>` when the project keeps its own version. A skip is the kit review's "keep it local", recorded where the change is.
+- The leg can't close while a line reads `— pending`. `git grep -n -- '— pending$' docs/sprints` lists what is still owed.
+- A carry back doesn't move the project's stamp. The stamp says which kit the project adopted from; the merged lines say what came after.
+
 **Consequences**
 - `plan.md` becomes the single point of failure. If it drifts, nothing resolves.
 - Overhead managing the extra files.

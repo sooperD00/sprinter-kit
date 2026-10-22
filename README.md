@@ -113,15 +113,17 @@ first.
    that project.
 6. Tag the kit: `git tag v0.2 && git push --tags` after the first review, `v0.3` after the next.
 
-**Bringing a kit change into an older project.** Diff the kit from the project's stamp (the
-version in its handbook's Status line) to the new tag:
+**Bringing a kit change into an older project.** Carry backs do this, one kit sprint at a time
+(the handbook's "Carry back a kit change"). A project that missed them, one adopted before carry
+backs existed, catches up once by diffing the kit from its stamp (the version in its handbook's
+Status line):
 
 ```
-git -C ~/repos/sprinter-kit diff <stamp>..v0.2 -- templates/
+git -C ~/repos/sprinter-kit diff <stamp>..HEAD -- templates/
 ```
 
-Apply what you want by hand, then update the stamp to the tag. Do this by hand a few times before
-scripting it.
+Apply what you want by hand, then mark each sprint's Carry back line for that project merged or
+skipped. From then on, carry backs keep it current.
 
 ## Later ++
 

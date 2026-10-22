@@ -7,7 +7,7 @@ Defines the `stack:` prefix beside `kit:`, sends planning sessions to the stack 
 
 **Kind:** feature.
 **Legs:**
-- a — the handbook's "Housekeeping and tech debt" gains two rules. The prefix: `[h-<id>] stack: <tool> — <gotcha>`, written for a public repo and held until a review moves it into the stack notes. Promotion: an item keeps its ID when the kit takes it, the kit's sprint names it under Brings in, and its Carry back line stays pending until the project's copy is updated. This repo's sprint files pilot that format now.
+- a — the handbook's "Housekeeping and tech debt" gains two rules. The prefix: `[h-<id>] stack: <tool> — <gotcha>`, written for a public repo and held until a review moves it into the stack notes. Promotion landed early, on 2026-10-21, as the handbook's "Carry back a kit change": check it against what `[s-b57080-b]`'s pilot found, and clear the "this repo's own copies" Carry back lines it retires (13 sprint files, this one included). Leg d carries the section into one-big-map's handbook.
 - b — "Plan a sprint" says to read the stack notes for each tool a leg touches, and copy each gotcha that applies into that leg's Watches. The notes' location becomes an init option.
 - c — README's kit review gains the `stack:` grep and the `— pending` grep.
 - d — carry back to one-big-map.

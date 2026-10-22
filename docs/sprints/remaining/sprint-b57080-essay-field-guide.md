@@ -105,8 +105,8 @@ Used by: `<module>`
 
 **Done when**
 - [ ] one-big-map's `kit-sync/b57080` branch changes exactly two files (`git diff --stat main...kit-sync/b57080`): the entry-rules comment sits under the line that says what `docs/field-guide.md` holds, and `[h-f44ef7]` is gone from `docs/sprints/housekeeping.md`.
-- [ ] Its pull request names the kit commit it carries back.
-- [ ] Once that pull request merges, this file's Carry back line reads `merged YYYY-MM-DD <sha>`.
+- [ ] Its pull request names the kit sprint and links the kit commit it carries back.
+- [ ] Once that pull request merges, this file's Carry back line reads `merged YYYY-MM-DD, PR #N`.
 
 **Commits**
 | # | | |
