@@ -31,6 +31,8 @@ done in. Re-order by moving a row: no sprint file changes when the order does.
 | | `[s-fc4d9e]` | [A clean-clone check and CI workflow that init installs](remaining/sprint-fc4d9e-clean-clone-ci.md) | planned | [s-319ddd] | — |
 | | `[s-b0557c]` | [Agent reflection process](remaining/sprint-b0557c-reflection.md) | planned | — | — |
 | | `[s-3bf710]` | [Slash commands for the kit's prompts, installed once per machine](remaining/sprint-3bf710-slash-commands.md) | planned | — | — |
+| | `[s-bbcfb5]` | [Stack options for init: Python, Node and .NET](remaining/sprint-bbcfb5-stacks.md) | planned | — | — |
+| | `[s-900c56]` | [The optional .NET checks record and CI steps](remaining/sprint-900c56-dotnet-checks.md) | planned | [s-bbcfb5], [s-319ddd], [s-fc4d9e] | — |
 
 **Carry back.** Most sprints here change a template that projects already hold copies of. Each
 sprint file lists those copies under Carry back, `— pending` until the update lands, and lists
